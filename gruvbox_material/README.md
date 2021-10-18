@@ -1,3 +1,3 @@
 # Gruvbox Material
 
-By @sainnhe.
+By [Sainnhe Park](https://github.com/sainnhe).
