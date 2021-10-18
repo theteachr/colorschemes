@@ -1,0 +1,22 @@
+body {
+  background: var(--background, white);
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+	color: var(--white, black);
+}
+
+.blocks {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.color-block {
+  --size: 32px;
+  width: var(--size);
+  height: var(--size);
+  background: var(--color, #000);
+  border-radius: 50%;
+}
