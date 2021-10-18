@@ -10,11 +10,11 @@ body {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .color-block {
-  --size: 32px;
+  --size: 64px;
   width: var(--size);
   height: var(--size);
   background: var(--color, #000);
