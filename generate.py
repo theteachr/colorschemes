@@ -8,23 +8,21 @@ from themes import (
 	tokyonight,
 )
 
-def make_root(color_dict):
-    css_color_data = {
+def to_hsl(color_dict):
+    return {
         color: 'hsl({}, {}%, {}%)'.format(*values)
         for color, values in color_dict.items()
     }
 
-    root = ':root {{\n{}\n}}\n'.format(
+def make_root(css_color_data):
+    return ':root {{\n{}\n}}\n'.format(
             ';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items())))
 
-    return root
-
 def export_colors(color_dict, out_file):
-    root = make_root(color_dict)
+    root = make_root(to_hsl(color_dict))
 
     with open(out_file, 'w') as f:
         f.write(root)
-        f.write('\n')
 
 def main():
     export_colors(gruvbox_material.COLORS, 'colors/css/colors.css')
