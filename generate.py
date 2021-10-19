@@ -16,7 +16,7 @@ def to_hsl(color_dict):
 	}
 
 
-def make_root(css_color_data):
+def create_root(css_color_data):
 	return ':root {{\n{}\n}}\n'.format(
 		';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items()))
 	)
@@ -24,7 +24,7 @@ def make_root(css_color_data):
 
 def export_colors(color_dict, out_file):
 	with open(out_file, 'w') as f:
-		f.write(make_root(to_hsl(color_dict)))
+		f.write(create_root(to_hsl(color_dict)))
 
 
 def create_coolors_url(colors):
