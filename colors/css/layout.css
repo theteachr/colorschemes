@@ -4,6 +4,8 @@ body {
   min-height: 100vh;
   place-items: center;
 	color: var(--white, black);
+	padding: 0;
+	margin: 0;
 }
 
 .blocks {
