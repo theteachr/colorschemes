@@ -27,6 +27,10 @@ def export_colors(color_dict, out_file):
 		f.write(make_root(to_hsl(color_dict)))
 
 
+def create_coolors_url(colors):
+	return 'https://coolors.co/{}'.format('-'.join(colors))
+
+
 def main():
 	export_colors(gruvbox_material.COLORS, 'colors/css/colors.css')
 
