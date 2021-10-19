@@ -33,8 +33,7 @@ def create_coolors_url(colors):
 
 def create_dict_from_kitty_conf(conf_file):
 	with open(conf_file) as f:
-		init = dict(map(lambda line: line.rstrip().split(),
-				f.readlines()))
+		init = dict(map(lambda line: line.rstrip().split(), f.readlines()))
 	
 	res = dict(background=init['background'][1:])
 	res.update({COLORS[i]: init[f'color{i}'][1:] for i in range(8)})
