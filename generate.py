@@ -54,10 +54,7 @@ COLORS = [
 ]
 
 def main():
-	#export_colors(gruvbox_material.COLORS, 'colors/css/colors.css')
-	colors = create_dict_from_kitty_conf('themes/ayu/kitty/ayu_mirage.conf')
-
-	print(create_coolors_url(colors.values()))
+	export_colors(gruvbox_material.COLORS, 'colors/css/colors.css')
 
 
 if __name__ == '__main__':
