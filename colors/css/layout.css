@@ -8,11 +8,35 @@ body {
 	margin: 0;
 }
 
+nav {
+	position: fixed;
+	top: 0;
+	background: var(--white, pink);
+	display: block;
+	width: 100%;
+	color: var(--black, black);
+	padding: 1rem 1.5rem;
+}
+
+nav > ul {
+	padding: 0;
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	gap: 1.8rem;
+}
+
+nav > ul > li {
+	cursor: pointer;
+}
+
 .blocks {
   list-style: none;
-  padding: 0;
+  padding: 1rem;
   display: flex;
+	justify-content: center;
   gap: 1.5rem;
+	flex-wrap: wrap;
 }
 
 .color-block {
