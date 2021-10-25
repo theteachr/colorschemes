@@ -16,15 +16,10 @@ def to_hsl(color_dict):
 	}
 
 
-def create_root(css_color_data):
-	return ':root {{\n{}\n}}\n'.format(
+def create_root(scheme_name, css_color_data):
+	return ':root.{{}} {{{{\n{}\n}}}}\n'.format(
 		';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items()))
-	)
-
-
-def export_colors(color_dict, out_file):
-	with open(out_file, 'w') as f:
-		f.write(create_root(to_hsl(color_dict)))
+	).format(scheme_name)
 
 
 def create_coolors_url(colors):
@@ -52,9 +47,28 @@ COLORS = [
 	'white',
 ]
 
-def main():
-	export_colors(gruvbox_material.COLORS, 'colors/css/colors.css')
+SCHEMES = {
+    'Ayu Mirage': ayu,
+    'Everforest': everforest,
+    'Gruvbox Material': gruvbox_material,
+    'Sonokai Andromeda': sonokai,
+    'Tokyonight': tokyonight,
+}
 
+def main():
+    # define theme colors
+    roots = [
+        create_root('-'.join(scheme_name.lower().split()), to_hsl(mod.COLORS))
+        for scheme_name, mod in SCHEMES.items()
+    ]
+
+    # add color classes
+    color_classes = '\n'.join(map('.{0} {{\n\tbackground: var(--{0});\n}}'.format, COLORS))
+
+    with open('colors/css/colors.css', 'w') as f:
+        f.writelines(roots)
+        f.write(color_classes)
+        f.write('\n')
 
 if __name__ == '__main__':
 	main()
