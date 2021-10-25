@@ -1,6 +1,10 @@
 body {
   background: var(--background, white);
   display: grid;
+	grid-template-rows: 5rem 1fr;
+	grid-template-areas:
+		"nav"
+		"space";
   min-height: 100vh;
   place-items: center;
 	color: var(--white, black);
@@ -9,13 +13,12 @@ body {
 }
 
 nav {
-	position: fixed;
-	top: 0;
 	background: var(--white, pink);
 	display: block;
 	width: 100%;
 	color: var(--black, black);
 	padding: 1rem 1.5rem;
+	grid-area: nav;
 }
 
 nav > ul {
@@ -37,12 +40,12 @@ nav > ul > li {
 	justify-content: center;
   gap: 1.5rem;
 	flex-wrap: wrap;
+	grid-area: space;
 }
 
 .color-block {
   --size: 64px;
   width: var(--size);
   height: var(--size);
-  background: var(--color, #000);
   border-radius: 50%;
 }
