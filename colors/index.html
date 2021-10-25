@@ -1,48 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="ayu-mirage">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>Colors</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>🍡</svg>">
-		<link rel="stylesheet" href="css/colors.css">
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22></svg>">
 		<link rel="stylesheet" href="css/layout.css">
+		<link rel="stylesheet" href="css/colors.css">
 	</head>
 	<body>
-		<nav>
-			<ul>
-				<li>Ayu</li>
-				<li>Everforest</li>
-				<li>Sonokai</li>
-				<li>Gruvbox</li>
-				<li>Tokyonight</li>
-			</ul>
-		</nav>
+		<select id="scheme-selector">
+			<option value="ayu-mirage" selected>Ayu</option>
+			<option value="everforest">Everforest</option>
+			<option value="sonokai-andromeda">Sonokai</option>
+			<option value="gruvbox-material">Gruvbox</option>
+			<option value="tokyonight">Tokyonight</option>
+		</select>
 		<ul class="blocks">
 			<li>
-				<div class="color-block" style="--color:var(--red)">
+				<div class="color-block red">
 				</div>
 			</li>
 			<li>
-				<div class="color-block" style="--color:var(--green)">
+				<div class="color-block green">
 				</div>
 			</li>
 			<li>
-				<div class="color-block" style="--color:var(--yellow)">
+				<div class="color-block yellow">
 				</div>
 			</li>
 			<li>
-				<div class="color-block" style="--color:var(--blue)">
+				<div class="color-block blue">
 				</div>
 			</li>
 			<li>
-				<div class="color-block" style="--color:var(--magenta)">
+				<div class="color-block magenta">
 				</div>
 			</li>
 			<li>
-				<div class="color-block" style="--color:var(--cyan)">
+				<div class="color-block cyan">
 				</div>
 			</li>
 		</ul>
+		<script src="main.js"></script>
 	</body>
 </html>
