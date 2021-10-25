@@ -1,6 +1,6 @@
 from itertools import starmap
 
-from themes import (
+from schemes import (
 	ayu,
 	everforest,
 	gruvbox_material,
