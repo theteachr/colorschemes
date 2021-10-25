@@ -1,4 +1,26 @@
-:root {
+:root.ayu-mirage {
+	--background: hsl(220, 21%, 16%);
+	--black: hsl(220, 16%, 23%);
+	--red: hsl(7, 77%, 69%);
+	--green: hsl(85, 47%, 62%);
+	--yellow: hsl(40, 93%, 73%);
+	--blue: hsl(200, 93%, 70%);
+	--magenta: hsl(260, 86%, 85%);
+	--cyan: hsl(160, 57%, 72%);
+	--white: hsl(0, 0%, 78%)
+}
+:root.everforest {
+	--background: hsl(193, 14%, 13%);
+	--black: hsl(201, 15%, 23%);
+	--red: hsl(359, 67%, 70%);
+	--green: hsl(83, 34%, 63%);
+	--yellow: hsl(40, 54%, 68%);
+	--blue: hsl(172, 26%, 61%);
+	--magenta: hsl(331, 39%, 72%);
+	--cyan: hsl(135, 31%, 64%);
+	--white: hsl(41, 36%, 76%)
+}
+:root.gruvbox-material {
 	--black: hsl(20, 8%, 29%);
 	--red: hsl(1, 80%, 66%);
 	--green: hsl(71, 32%, 57%);
@@ -8,4 +30,50 @@
 	--cyan: hsl(121, 23%, 62%);
 	--white: hsl(35, 40%, 72%);
 	--background: hsl(0, 0%, 13%)
+}
+:root.sonokai-andromeda {
+	--background: hsl(223, 9%, 15%);
+	--black: hsl(228, 14%, 29%);
+	--red: hsl(348, 92%, 67%);
+	--green: hsl(96, 47%, 64%);
+	--yellow: hsl(38, 83%, 70%);
+	--blue: hsl(192, 71%, 65%);
+	--magenta: hsl(268, 63%, 75%);
+	--cyan: hsl(19, 96%, 70%);
+	--white: hsl(200, 5%, 89%)
+}
+:root.tokyonight {
+	--background: hsl(235, 19%, 13%);
+	--black: hsl(230, 24%, 19%);
+	--red: hsl(349, 89%, 72%);
+	--green: hsl(89, 51%, 61%);
+	--yellow: hsl(36, 66%, 64%);
+	--blue: hsl(221, 89%, 72%);
+	--magenta: hsl(261, 85%, 79%);
+	--cyan: hsl(202, 100%, 75%);
+	--white: hsl(230, 71%, 92%)
+}
+.black {
+	background: var(--black);
+}
+.red {
+	background: var(--red);
+}
+.green {
+	background: var(--green);
+}
+.yellow {
+	background: var(--yellow);
+}
+.blue {
+	background: var(--blue);
+}
+.magenta {
+	background: var(--magenta);
+}
+.cyan {
+	background: var(--cyan);
+}
+.white {
+	background: var(--white);
 }
