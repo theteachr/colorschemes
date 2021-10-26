@@ -29,7 +29,7 @@ def create_coolors_url(colors):
 def create_dict_from_kitty_conf(conf_file):
 	with open(conf_file) as f:
 		init = dict(map(lambda line: line.rstrip().split(), f.readlines()))
-	
+
 	res = dict(background=init['background'][1:])
 	res.update({COLORS[i]: init[f'color{i}'][1:] for i in range(8)})
 
@@ -48,27 +48,27 @@ COLORS = [
 ]
 
 SCHEMES = {
-    'Ayu Mirage': ayu,
-    'Everforest': everforest,
-    'Gruvbox Material': gruvbox_material,
-    'Sonokai Andromeda': sonokai,
-    'Tokyonight': tokyonight,
+	'Ayu Mirage': ayu,
+	'Everforest': everforest,
+	'Gruvbox Material': gruvbox_material,
+	'Sonokai Andromeda': sonokai,
+	'Tokyonight': tokyonight,
 }
 
 def main():
-    # define theme colors
-    roots = [
-        create_root('-'.join(scheme_name.lower().split()), to_hsl(mod.COLORS))
-        for scheme_name, mod in SCHEMES.items()
-    ]
+	# define theme colors
+	roots = [
+		create_root('-'.join(scheme_name.lower().split()), to_hsl(mod.COLORS))
+		for scheme_name, mod in SCHEMES.items()
+	]
 
-    # add color classes
-    color_classes = '\n'.join(map('.{0} {{\n\tbackground: var(--{0});\n}}'.format, COLORS))
+	# add color classes
+	color_classes = '\n'.join(map('.{0} {{\n\tbackground: var(--{0});\n}}'.format, COLORS))
 
-    with open('colors/css/colors.css', 'w') as f:
-        f.writelines(roots)
-        f.write(color_classes)
-        f.write('\n')
+	with open('colors/css/colors.css', 'w') as f:
+		f.writelines(roots)
+		f.write(color_classes)
+		f.write('\n')
 
 if __name__ == '__main__':
 	main()
