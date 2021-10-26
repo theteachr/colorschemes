@@ -1,51 +1,38 @@
 body {
-  background: var(--background, white);
-  display: grid;
-	grid-template-rows: 5rem 1fr;
-	grid-template-areas:
-		"nav"
-		"space";
-  min-height: 100vh;
-  place-items: center;
+	background: var(--background, white);
+	display: grid;
+	place-content: center;
+	min-height: 100vh;
 	color: var(--white, black);
 	padding: 0;
 	margin: 0;
 }
 
-nav {
-	background: var(--white, pink);
-	display: block;
-	width: 100%;
-	color: var(--black, black);
-	padding: 1rem 1.5rem;
-	grid-area: nav;
-}
-
-nav > ul {
-	padding: 0;
+.blocks {
 	list-style: none;
+	padding: 1rem;
 	display: flex;
 	justify-content: center;
-	gap: 1.8rem;
-}
-
-nav > ul > li {
-	cursor: pointer;
-}
-
-.blocks {
-  list-style: none;
-  padding: 1rem;
-  display: flex;
-	justify-content: center;
-  gap: 1.5rem;
+	gap: 1.5rem;
 	flex-wrap: wrap;
 	grid-area: space;
 }
 
 .color-block {
-  --size: 64px;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
+	--size: 64px;
+	width: var(--size);
+	height: var(--size);
+	border-radius: 50%;
+}
+
+header {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: .5rem;
+	text-align: center;
+	margin: 0;
+	margin-top: 2.4rem;
 }
