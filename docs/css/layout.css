@@ -1,11 +1,13 @@
 body {
 	background: var(--background, white);
 	display: grid;
-	place-content: center;
-	min-height: 100vh;
+	grid-template-rows: 2fr 18fr 1.5fr;
+	grid-template-areas: "header" "blocks" "footer";
+	height: 100vh;
 	color: var(--white, black);
 	padding: 0;
 	margin: 0;
+	font-family: 'Teko', sans-serif;
 }
 
 .blocks {
@@ -15,7 +17,8 @@ body {
 	justify-content: center;
 	gap: 1.5rem;
 	flex-wrap: wrap;
-	grid-area: space;
+	place-self: center;
+	grid-area: blocks;
 }
 
 .color-block {
@@ -25,14 +28,18 @@ body {
 	border-radius: 50%;
 }
 
-header {
-	width: 100%;
-	position: absolute;
-	top: 0;
+header, footer {
 	text-transform: uppercase;
 	text-align: center;
-	letter-spacing: .5rem;
+	letter-spacing: 0.5rem;
 	text-align: center;
-	margin: 0;
 	background: var(--black);
+}
+
+header {
+	grid-area: header;
+}
+
+footer {
+	grid-area: footer;
 }
