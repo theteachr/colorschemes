@@ -1,6 +1,37 @@
-const setTheme = theme => document.documentElement.className = theme;
+const setScheme = theme => document.documentElement.className = theme;
 
-document.getElementById('scheme-selector').addEventListener('change', function () {
-	console.log(`Setting theme to "${this.value}"`);
-	setTheme(this.value);
+const schemeHeading = document.querySelector('#scheme-name')
+
+const numSchemes = 5;
+const schemes = [
+	['ayu-mirage', 'ayu mirage'],
+	['gruvbox-material', 'gruvbox material'],
+	['sonokai-andromeda', 'sonokai andromeda'],
+	['everforest', 'everforest'],
+	['tokyonight', 'tokyonight'],
+];
+
+let schemeIdx = 0;
+
+const mod = (num, den) => {
+	if (num >= 0)
+		return num % den;
+	return den - (-num % den);
+}
+
+const nextScheme = f => {
+	schemeIdx = mod(f(schemeIdx), numSchemes)
+
+	const [className, schemeName] = schemes[schemeIdx];
+	console.log(`Setting theme to ${schemeName}...`);
+
+	setScheme(className);
+	schemeHeading.textContent = schemeName;
+}
+
+this.addEventListener('keypress', key => {
+	switch (key.keyCode) {
+		case 106: nextScheme(i => i + 1); break;
+		case 107: nextScheme(i => i - 1); break;
+	}
 });
