@@ -7,7 +7,7 @@ body {
 	color: var(--white, black);
 	padding: 0;
 	margin: 0;
-	font-family: 'Teko', sans-serif;
+	font-family: 'Helvetica Neue', sans-serif;
 }
 
 .blocks {
@@ -28,18 +28,16 @@ body {
 	border-radius: 50%;
 }
 
-header, footer {
+header {
 	text-transform: uppercase;
 	text-align: center;
 	letter-spacing: 0.5rem;
 	text-align: center;
-	background: var(--black);
-}
-
-header {
 	grid-area: header;
+	font-family: 'Teko', sans-serif;
 }
 
-footer {
-	grid-area: footer;
+header, footer {
+	background: var(--black);
+	padding: 0 1.8rem;
 }
