@@ -23,7 +23,7 @@ const nextScheme = f => {
 	schemeIdx = mod(f(schemeIdx), numSchemes)
 
 	const [className, schemeName] = schemes[schemeIdx];
-	console.log(`Setting theme to ${schemeName}...`);
+	console.log(`Setting scheme to ${schemeName}...`);
 
 	setScheme(className);
 	schemeHeading.textContent = schemeName;

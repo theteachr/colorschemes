@@ -56,7 +56,7 @@ SCHEMES = {
 }
 
 def main():
-	# define theme colors
+	# define scheme colors
 	roots = [
 		create_root('-'.join(scheme_name.lower().split()), to_hsl(mod.COLORS))
 		for scheme_name, mod in SCHEMES.items()
