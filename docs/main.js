@@ -1,4 +1,4 @@
-const setScheme = theme => document.documentElement.className = theme;
+const setScheme = scheme => document.documentElement.className = scheme;
 
 const schemeHeading = document.querySelector('#scheme-name')
 
