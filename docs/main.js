@@ -31,6 +31,7 @@ const nextScheme = f => {
 
 this.addEventListener('keypress', key => {
 	switch (key.keyCode) {
+		case 32 :
 		case 106: nextScheme(i => i + 1); break;
 		case 107: nextScheme(i => i - 1); break;
 	}
