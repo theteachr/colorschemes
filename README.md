@@ -3,6 +3,14 @@
 A collection of all my favorite colorschemes and their ports for various
 terminals.
 
+## Screen Caps
+
+![Ayu Mirage](caps/ayu_mirage.png)
+![Everforest](caps/everforest.png)
+![Gruvbox Material](caps/gruvbox_material.png)
+![Sonokai Andromeda](caps/sonokai_andromeda.png)
+![Tokyonight](caps/tokyonight.png)
+
 ##### Links
 
 - [Ayu](https://github.com/ayu-theme/ayu-colors)
