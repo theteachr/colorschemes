@@ -10,6 +10,8 @@ from schemes import (
 	tokyonight,
 )
 
+# TODO add scheme name in the `__init__` of the scheme package?
+# TODO change js to automatically fetch the new colorschemes
 
 def to_hsl(color_dict):
 	return {
