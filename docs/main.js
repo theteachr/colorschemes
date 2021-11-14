@@ -1,4 +1,4 @@
-const setScheme = theme => document.documentElement.className = theme;
+const setScheme = scheme => document.documentElement.className = scheme;
 
 const schemeHeading = document.querySelector('#scheme-name')
 
@@ -23,7 +23,7 @@ const nextScheme = f => {
 	schemeIdx = mod(f(schemeIdx), numSchemes)
 
 	const [className, schemeName] = schemes[schemeIdx];
-	console.log(`Setting theme to ${schemeName}...`);
+	console.log(`Setting scheme to ${schemeName}...`);
 
 	setScheme(className);
 	schemeHeading.textContent = schemeName;
@@ -31,6 +31,7 @@ const nextScheme = f => {
 
 this.addEventListener('keypress', key => {
 	switch (key.keyCode) {
+		case  32:
 		case 106: nextScheme(i => i + 1); break;
 		case 107: nextScheme(i => i - 1); break;
 	}
