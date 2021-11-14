@@ -53,6 +53,17 @@
 	--cyan: hsl(202, 100%, 75%);
 	--white: hsl(230, 71%, 92%)
 }
+:root.nightfly {
+	--background: hsl(205, 100%, 7%);
+	--black: hsl(205, 100%, 16%);
+	--red: hsl(359, 100%, 65%);
+	--green: hsl(89, 48%, 62%);
+	--yellow: hsl(45, 60%, 74%);
+	--blue: hsl(218, 90%, 74%);
+	--magenta: hsl(280, 60%, 74%);
+	--cyan: hsl(170, 58%, 66%);
+	--white: hsl(204, 100%, 96%)
+}
 .black {
 	background: var(--black);
 }

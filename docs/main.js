@@ -2,13 +2,14 @@ const setScheme = scheme => document.documentElement.className = scheme;
 
 const schemeHeading = document.querySelector('#scheme-name')
 
-const numSchemes = 5;
+const numSchemes = 6;
 const schemes = [
 	['ayu-mirage', 'ayu mirage'],
 	['gruvbox-material', 'gruvbox material'],
 	['sonokai-andromeda', 'sonokai andromeda'],
 	['everforest', 'everforest'],
 	['tokyonight', 'tokyonight'],
+	['nightfly', 'nightfly'],
 ];
 
 let schemeIdx = 0;

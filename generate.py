@@ -1,9 +1,11 @@
 from itertools import starmap
+from helpers import coolors
 
 from schemes import (
 	ayu,
 	everforest,
 	gruvbox_material,
+	nightfly,
 	sonokai,
 	tokyonight,
 )
@@ -53,6 +55,7 @@ SCHEMES = {
 	'Gruvbox Material': gruvbox_material,
 	'Sonokai Andromeda': sonokai,
 	'Tokyonight': tokyonight,
+    'Nightfly': nightfly,
 }
 
 def main():
