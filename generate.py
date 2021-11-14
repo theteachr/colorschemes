@@ -65,7 +65,7 @@ def main():
 	# add color classes
 	color_classes = '\n'.join(map('.{0} {{\n\tbackground: var(--{0});\n}}'.format, COLORS))
 
-	with open('colors/css/colors.css', 'w') as f:
+	with open('docs/css/colors.css', 'w') as f:
 		f.writelines(roots)
 		f.write(color_classes)
 		f.write('\n')
