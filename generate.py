@@ -15,9 +15,9 @@ from schemes import (
 
 def to_hsl(color_dict):
 	return {
-			color: 'hsl({}, {}%, {}%)'.format(*values)
-			for color, values in color_dict.items()
-			}
+		color: 'hsl({}, {}%, {}%)'.format(*values)
+		for color, values in color_dict.items()
+	}
 
 
 def create_root(scheme_name, css_color_data):
@@ -30,10 +30,19 @@ def create_dict_from_kitty_conf(conf_file):
 	with open(conf_file) as f:
 		init = dict(map(lambda line: line.rstrip().split(), f.readlines()))
 
-	res = dict(background=init['background'][1:])
-	res.update({COLORS[i]: init[f'color{i}'][1:] for i in range(8)})
+	keys = [
+		'background',
+		'color0',
+		'color1',
+		'color2',
+		'color3',
+		'color4',
+		'color5',
+		'color6',
+		'color7',
+	]
 
-	return res
+	return {key: init[key] for key in keys}
 
 
 COLORS = [
@@ -86,4 +95,4 @@ def test_coolors():
 	print(coolors.to_colors_dict(export))
 
 if __name__ == '__main__':
-	main()
+	print(create_dict_from_kitty_conf('schemes/everforest/kitty/everforest.conf'))
