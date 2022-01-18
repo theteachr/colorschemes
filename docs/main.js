@@ -3,6 +3,8 @@ const setScheme = scheme => document.documentElement.className = scheme;
 const schemeHeading = document.querySelector('#scheme-name')
 
 const numSchemes = 6;
+
+// TODO Make this dynamic
 const schemes = [
 	['ayu-mirage', 'ayu mirage'],
 	['gruvbox-material', 'gruvbox material'],
@@ -14,13 +16,13 @@ const schemes = [
 
 let schemeIdx = 0;
 
-const mod = (num, den) => {
+function mod(num, den) {
 	if (num >= 0)
 		return num % den;
 	return den - (-num % den);
 }
 
-const nextScheme = f => {
+function nextScheme(f) {
 	schemeIdx = mod(f(schemeIdx), numSchemes)
 
 	const [className, schemeName] = schemes[schemeIdx];
