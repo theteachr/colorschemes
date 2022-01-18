@@ -28,21 +28,7 @@ def create_root(scheme_name, css_color_data):
 
 def create_dict_from_kitty_conf(conf_file):
 	with open(conf_file) as f:
-		init = dict(map(lambda line: line.rstrip().split(), f.readlines()))
-
-	keys = [
-		'background',
-		'color0',
-		'color1',
-		'color2',
-		'color3',
-		'color4',
-		'color5',
-		'color6',
-		'color7',
-	]
-
-	return {key: init[key] for key in keys}
+		return dict(map(str.split, f.read().rstrip().split('\n')))
 
 
 COLORS = [
