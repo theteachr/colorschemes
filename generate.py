@@ -1,5 +1,5 @@
 from itertools import starmap
-from helpers import coolors_export_to_color_dict, color_tuple_to_hsl
+from utils import coolors_export_to_color_dict, color_tuple_to_hsl
 
 from schemes import (
 	ayu,
@@ -19,14 +19,6 @@ def create_root(scheme_name, css_color_data):
 		';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items()))
 	).format(scheme_name)
 
-
-def create_dict_from_kitty_conf(conf_file):
-	with open(conf_file) as f:
-		return dict(map(str.split, f.read().rstrip().split('\n')))
-
-
-def create_kitty_conf_from_dict(color_dict):
-	pass
 
 
 SCHEMES = {
@@ -55,4 +47,3 @@ def main():
 		f.writelines(roots)
 		f.write(color_classes)
 		f.write('\n')
-
