@@ -1,5 +1,5 @@
 from itertools import starmap
-from helpers import coolors
+from helpers import coolors_export_to_color_dict, color_tuple_to_hsl
 
 from schemes import (
 	ayu,
@@ -12,13 +12,7 @@ from schemes import (
 
 # TODO add scheme name in the `__init__` of the scheme package?
 # TODO change js to automatically fetch the new colorschemes
-
-def to_hsl(color_dict):
-	return {
-		color: 'hsl({}, {}%, {}%)'.format(*values)
-		for color, values in color_dict.items()
-	}
-
+# TODO add cursor colors
 
 def create_root(scheme_name, css_color_data):
 	return ':root.{{}} {{{{\n{}\n}}}}\n'.format(
@@ -31,16 +25,9 @@ def create_dict_from_kitty_conf(conf_file):
 		return dict(map(str.split, f.read().rstrip().split('\n')))
 
 
-COLORS = [
-	'black',
-	'red',
-	'green',
-	'yellow',
-	'blue',
-	'magenta',
-	'cyan',
-	'white',
-]
+def create_kitty_conf_from_dict(color_dict):
+	pass
+
 
 SCHEMES = {
 	'Ayu Mirage': ayu,
@@ -54,7 +41,10 @@ SCHEMES = {
 def main():
 	# define scheme colors
 	roots = [
-		create_root('-'.join(scheme_name.lower().split()), to_hsl(mod.COLORS))
+		create_root(
+			'-'.join(scheme_name.lower().split()),
+			{component: color_tuple_to_hsl(color) for component, color in mod.COLORS.items()}
+		)
 		for scheme_name, mod in SCHEMES.items()
 	]
 
@@ -66,19 +56,3 @@ def main():
 		f.write(color_classes)
 		f.write('\n')
 
-def test_coolors():
-	export = '''\
---rich-black-fogra-29: hsla(205, 100%, 7%, 1);
---prussian-blue: hsla(205, 100%, 16%, 1);
---tart-orange: hsla(359, 100%, 65%, 1);
---pistachio: hsla(89, 48%, 62%, 1);
---medium-champagne: hsla(45, 60%, 74%, 1);
---french-sky-blue: hsla(218, 90%, 74%, 1);
---bright-lilac: hsla(280, 60%, 74%, 1);
---middle-blue-green: hsla(170, 58%, 66%, 1);
---alice-blue: hsla(204, 100%, 96%, 1);\
-'''
-	print(coolors.to_colors_dict(export))
-
-if __name__ == '__main__':
-	print(create_dict_from_kitty_conf('schemes/everforest/kitty/everforest.conf'))
