@@ -52,7 +52,7 @@ def create_kitty_conf_from_coolors_hex_csv_export(line):
 
 def main():
     coolors_export = '''\
-            --rich-black-fogra-29: hsla(205, 100%, 7%, 1);
+--rich-black-fogra-29: hsla(205, 100%, 7%, 1);
 --prussian-blue: hsla(205, 100%, 16%, 1);
 --tart-orange: hsla(359, 100%, 65%, 1);
 --pistachio: hsla(89, 48%, 62%, 1);
