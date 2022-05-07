@@ -9,3 +9,5 @@ COLORS = {
     'cyan': (160, 57, 72),
     'white': (0, 0, 78),
 }
+
+NAME = 'Ayu Mirage'

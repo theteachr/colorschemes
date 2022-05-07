@@ -9,3 +9,5 @@ COLORS = {
     'cyan': (19, 96, 70),
     'white': (200, 5, 89),
 }
+
+NAME = 'Sonokai Andromeda'

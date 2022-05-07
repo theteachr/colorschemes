@@ -1,5 +1,7 @@
+from dataclasses import dataclass
 from itertools import starmap
-from typing import List, Tuple
+from typing import Dict, List, Tuple
+from typing_extensions import Self
 from constants import COLORS
 from utils import color_tuple_to_hsl
 
@@ -13,37 +15,59 @@ from schemes import (
     tokyonight,
 )
 
+COLORSCHEME_MODS = [
+    ayu,
+    everforest,
+    gruvbox_material,
+    nightfly,
+    catppuccin,
+    sonokai,
+    tokyonight,
+]
+CSS_PROPERTY_DELIMITER = ';\n'
+
+@dataclass(frozen=True)
+class HSLColor:
+    hue: int
+    saturation: int
+    lightness: int
+
+    @classmethod
+    def from_tuple(cls, hsl: Tuple) -> Self:
+        return cls(*hsl)
+
+    def __repr__(self) -> str:
+        return f'hsl({self.hue}, {self.saturation}%, {self.lightness}%)'
+
+
+@dataclass(frozen=True)
+class Colorscheme:
+    name: str
+    colors: Dict[str, HSLColor]
+
+    def to_css_root(self) -> str:
+        color_properties = starmap('\t--{}: {!r}'.format, self.colors.items())
+        return f''':root.{hyphenate(self.name.lower())} {{
+{CSS_PROPERTY_DELIMITER.join(color_properties)}
+}}
+'''
+
+    @classmethod
+    def from_module(cls, m) -> Self:
+        colors = {name: HSLColor.from_tuple(hsl) for name, hsl in m.COLORS.items()}
+        return cls(m.NAME, colors)
+
+
 # TODO add scheme name in the `__init__` of the scheme package?
 # TODO change js to automatically fetch the new colorschemes
 # TODO add cursor colors
-
-def create_root(scheme_name: str, css_color_data: dict) -> str:
-    return ':root.{} {{\n{}\n}}\n'.format(scheme_name,
-        ';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items())))
-
-
-SCHEMES = [
-    ('Ayu Mirage', ayu),
-    ('Everforest', everforest),
-    ('Gruvbox Material', gruvbox_material),
-    ('Catppuccin', catppuccin),
-    ('Sonokai Andromeda', sonokai),
-    ('Tokyonight', tokyonight),
-    ('Nightfly', nightfly),
-]
 
 def hyphenate(text: str) -> str:
     return text.lower().replace(' ', '-')
 
 
-def generate_css(schemes: Tuple, css_out_file: str):
-    roots = [
-        create_root(
-            '-'.join(scheme_name.lower().split()),
-            {component: color_tuple_to_hsl(color) for component, color in mod.COLORS.items()})
-        for scheme_name, mod in schemes
-    ]
-
+def generate_css(colorschemes: List[Colorscheme], css_out_file: str):
+    roots = [colorscheme.to_css_root() for colorscheme in colorschemes]
     color_classes = '\n'.join(map('.{0} {{\n\tbackground: var(--{0});\n}}'.format, COLORS))
 
     with open(css_out_file, 'w') as f:
@@ -66,8 +90,8 @@ def generate_js(schemes: List, js_out_file: str):
 
 
 def generate_docs():
-    generate_css(SCHEMES, 'docs/css/colors.css')
-    generate_js(map(lambda pair: pair[0], SCHEMES), 'docs/main.js')
+    generate_css([Colorscheme.from_module(m) for m in COLORSCHEME_MODS], 'docs/css/colors.css')
+    generate_js([m.NAME for m in COLORSCHEME_MODS], 'docs/main.js')
 
 
 if __name__ == '__main__':

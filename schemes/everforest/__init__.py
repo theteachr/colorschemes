@@ -9,3 +9,5 @@ COLORS = {
     'cyan': (135, 31, 64),
     'white': (41, 36, 76),
 }
+
+NAME = 'Everforest'

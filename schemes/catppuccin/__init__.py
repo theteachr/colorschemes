@@ -9,3 +9,5 @@ COLORS = {
     'cyan': (171, 53, 81),
     'white': (10, 56, 91),
 }
+
+NAME = 'Catppuccin'

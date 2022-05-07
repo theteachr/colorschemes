@@ -9,3 +9,5 @@ COLORS = {
     'cyan': (202, 100, 75),
     'white': (230, 71, 92),
 }
+
+NAME = 'Tokyonight'

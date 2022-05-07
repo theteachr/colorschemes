@@ -9,3 +9,5 @@ COLORS = {
     'white': (35, 40, 72),
     'background': (0, 0, 13),
 }
+
+NAME = 'Gruvbox Material'
