@@ -4,6 +4,8 @@ import re
 from itertools import starmap
 from constants import COLORS
 
+# TODO fix module name
+
 def create_coolors_url(colors):
     return 'https://coolors.co/{}'.format('-'.join(colors))
 
@@ -61,7 +63,8 @@ def main():
 --bright-lilac: hsla(280, 60%, 74%, 1);
 --middle-blue-green: hsla(170, 58%, 66%, 1);
 --alice-blue: hsla(204, 100%, 96%, 1);\
-        '''
+'''
+
     color_dict = coolors_export_to_color_dict(coolors_export)
     print(color_dict)
 

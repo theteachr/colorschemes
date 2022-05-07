@@ -1,10 +1,7 @@
 const setScheme = scheme => document.documentElement.className = scheme;
-
-const schemeHeading = document.querySelector('#scheme-name')
-
+const schemeHeading = document.querySelector('#scheme-name');
 const numSchemes = 6;
 
-// TODO Make this dynamic
 const schemes = [
 	['ayu-mirage', 'ayu mirage'],
 	['gruvbox-material', 'gruvbox material'],

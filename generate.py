@@ -1,5 +1,6 @@
 from itertools import starmap
-from utils import coolors_export_to_color_dict, color_tuple_to_hsl
+from constants import COLORS
+from utils import color_tuple_to_hsl
 
 from schemes import (
     ayu,
@@ -46,3 +47,6 @@ def main():
         f.writelines(roots)
         f.write(color_classes)
         f.write('\n')
+
+if __name__ == '__main__':
+    main()
