@@ -13,10 +13,8 @@ const schemes = [
 
 let schemeIdx = 0;
 
-function mod(num, den) {
-	if (num >= 0)
-		return num % den;
-	return den - (-num % den);
+function mod(num, deno) {
+	return ((num % deno) + deno) % deno;
 }
 
 function nextScheme(f) {
