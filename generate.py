@@ -17,10 +17,8 @@ from schemes import (
 # TODO add cursor colors
 
 def create_root(scheme_name: str, css_color_data: dict) -> str:
-    return ':root.{{}} {{{{\n{}\n}}}}\n'.format(
-        ';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items()))
-    ).format(scheme_name)
-
+    return ':root.{} {{\n{}\n}}\n'.format(scheme_name,
+        ';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items())))
 
 
 SCHEMES = {
