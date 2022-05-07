@@ -1,27 +1,27 @@
 const setScheme = scheme => document.documentElement.className = scheme;
 const schemeHeading = document.querySelector('#scheme-name');
-const numSchemes = 6;
-const schemes = [['ayu-mirage', 'Ayu Mirage'], ['everforest', 'Everforest'], ['gruvbox-material', 'Gruvbox Material'], ['sonokai-andromeda', 'Sonokai Andromeda'], ['tokyonight', 'Tokyonight'], ['nightfly', 'Nightfly']];
+const numSchemes = {num_schemes};
+const schemes = {schemes};
 let schemeIdx = 0;
 
-function mod(num, deno) {
+function mod(num, deno) {{
 	return ((num % deno) + deno) % deno;
-}
+}}
 
-function nextScheme(f) {
+function nextScheme(f) {{
 	schemeIdx = mod(f(schemeIdx), numSchemes)
 
 	const [className, schemeName] = schemes[schemeIdx];
-	console.log(`Setting scheme to ${schemeName}...`);
+	console.log(`Setting scheme to ${{schemeName}}...`);
 
 	setScheme(className);
 	schemeHeading.textContent = schemeName;
-}
+}}
 
-this.addEventListener('keypress', key => {
-	switch (key.key) {
+this.addEventListener('keypress', key => {{
+	switch (key.key) {{
 		case " ":
 		case "j": nextScheme(i => i + 1); break;
 		case "k": nextScheme(i => i - 1); break;
-	}
-});
+	}}
+}});
