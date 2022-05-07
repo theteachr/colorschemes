@@ -7,6 +7,7 @@ from schemes import (
     everforest,
     gruvbox_material,
     nightfly,
+    catppuccin,
     sonokai,
     tokyonight,
 )
@@ -26,6 +27,7 @@ SCHEMES = {
     'Ayu Mirage': ayu,
     'Everforest': everforest,
     'Gruvbox Material': gruvbox_material,
+    'Catppuccin': catppuccin,
     'Sonokai Andromeda': sonokai,
     'Tokyonight': tokyonight,
     'Nightfly': nightfly,
@@ -35,6 +37,7 @@ def hyphenate(text: str) -> str:
     return text.lower().replace(' ', '-')
 
 def generate_docs():
+    # TODO decompose into `generate_css`
     # define scheme colors
     roots = [
         create_root(
@@ -51,6 +54,8 @@ def generate_docs():
         f.write(color_classes)
         f.write('\n')
 
+    generate_js()
+
 
 def generate_js():
     with open('template.tjs') as f:
@@ -64,5 +69,6 @@ def generate_js():
     with open('docs/main.js', 'w') as f:
         f.write(js)
 
+
 if __name__ == '__main__':
-    generate_js()
+    generate_docs()
