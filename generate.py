@@ -15,7 +15,7 @@ from schemes import (
 # TODO change js to automatically fetch the new colorschemes
 # TODO add cursor colors
 
-def create_root(scheme_name, css_color_data):
+def create_root(scheme_name: str, css_color_data: dict) -> str:
     return ':root.{{}} {{{{\n{}\n}}}}\n'.format(
         ';\n'.join(starmap('\t--{}: {}'.format, css_color_data.items()))
     ).format(scheme_name)
@@ -31,7 +31,10 @@ SCHEMES = {
     'Nightfly': nightfly,
 }
 
-def main():
+def hyphenate(text: str) -> str:
+    return text.lower().replace(' ', '-')
+
+def generate_docs():
     # define scheme colors
     roots = [
         create_root(
@@ -48,5 +51,18 @@ def main():
         f.write(color_classes)
         f.write('\n')
 
+
+def generate_js():
+    with open('template.tjs') as f:
+        js_template = f.read()
+
+    num_schemes = len(SCHEMES)
+    schemes = [[hyphenate(scheme_name), scheme_name] for scheme_name in SCHEMES.keys()]
+
+    js = js_template.format(num_schemes=num_schemes, schemes=schemes)
+
+    with open('docs/main.js', 'w') as f:
+        f.write(js)
+
 if __name__ == '__main__':
-    main()
+    generate_js()
