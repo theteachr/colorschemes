@@ -3,7 +3,6 @@ from itertools import starmap
 from typing import Dict, List, Tuple
 from typing_extensions import Self
 from constants import COLORS
-from utils import color_tuple_to_hsl
 
 from schemes import (
     ayu,
