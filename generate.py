@@ -57,9 +57,9 @@ class Colorscheme:
         return cls(m.NAME, colors)
 
 
-# TODO add scheme name in the `__init__` of the scheme package?
 # TODO change js to automatically fetch the new colorschemes
 # TODO add cursor colors
+# TODO add switchable schemes with variants (light/dark/solarized)
 
 def hyphenate(text: str) -> str:
     return text.lower().replace(' ', '-')
