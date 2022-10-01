@@ -57,7 +57,6 @@ class Colorscheme:
         return cls(m.NAME, colors)
 
 
-# TODO change js to automatically fetch the new colorschemes
 # TODO add cursor colors
 # TODO add switchable schemes with variants (light/dark/solarized)
 
