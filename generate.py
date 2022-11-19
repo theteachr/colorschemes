@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from itertools import starmap
-from typing import Dict, List, Tuple
-from typing_extensions import Self
+from typing import Dict, List, Self, Tuple
 from constants import COLORS
 
 from schemes import (
