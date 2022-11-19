@@ -12,11 +12,14 @@ def create_coolors_url(colors):
 
 
 def coolors_export_to_color_dict(coolors_hsl_export):
-    pattern = re.compile("hsla\((\d+), (\d+)%, (\d+)%, 1\)")
+    pattern = re.compile(r"hsla\((\d+), (\d+)%, (\d+)%, 1\)")
+    hsl_color_tuples = filter(
+        None, [pattern.search(line) for line in coolors_hsl_export.split("\n")]
+    )
 
     return {
-        color: tuple(map(int, pattern.search(line).groups()))
-        for color, line in zip(["background"] + COLORS, coolors_hsl_export.split("\n"))
+        color_name: tuple(map(int, value.groups()))
+        for color_name, value in zip(["background"] + COLORS, hsl_color_tuples)
     }
 
 
