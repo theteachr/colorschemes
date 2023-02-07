@@ -7,13 +7,13 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.2300262451171875</real>
+		<real>0.23529411852359772</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.13897418975830078</real>
+		<real>0.17254902422428131</real>
 		<key>Red Component</key>
-		<real>0.14855861663818359</real>
+		<real>0.16078431904315948</real>
 	</dict>
 	<key>Ansi 1 Color</key>
 	<dict>
@@ -189,13 +189,13 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.314361572265625</real>
+		<real>0.428314208984375</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.18970094621181488</real>
+		<real>0.32278752326965332</real>
 		<key>Red Component</key>
-		<real>0.20596103370189667</real>
+		<real>0.29795771837234497</real>
 	</dict>
 	<key>Ansi 9 Color</key>
 	<dict>
@@ -215,13 +215,13 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.18431372940540314</real>
+		<real>0.27450981736183167</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.11372549086809158</real>
+		<real>0.20392157137393951</real>
 		<key>Red Component</key>
-		<real>0.11764705926179886</real>
+		<real>0.18823529779911041</real>
 	</dict>
 	<key>Badge Color</key>
 	<dict>
@@ -241,13 +241,13 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.48627451062202454</real>
+		<real>0.45882353186607361</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.42352941632270813</real>
+		<real>0.61960786581039429</real>
 		<key>Red Component</key>
-		<real>0.43137255311012268</real>
+		<real>0.93725490570068359</real>
 	</dict>
 	<key>Cursor Color</key>
 	<dict>
@@ -339,19 +339,6 @@
 		<real>0.87843137979507446</real>
 		<key>Red Component</key>
 		<real>0.85098040103912354</real>
-	</dict>
-	<key>Tab Color</key>
-	<dict>
-		<key>Alpha Component</key>
-		<real>1</real>
-		<key>Blue Component</key>
-		<real>0.40392157435417175</real>
-		<key>Color Space</key>
-		<string>sRGB</string>
-		<key>Green Component</key>
-		<real>0.30980393290519714</real>
-		<key>Red Component</key>
-		<real>0.17647059261798859</real>
 	</dict>
 </dict>
 </plist>
