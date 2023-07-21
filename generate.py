@@ -11,6 +11,7 @@ from schemes import (
     catppuccin,
     sonokai,
     tokyonight,
+    rose,
 )
 
 COLORSCHEME_MODS = [
@@ -21,6 +22,7 @@ COLORSCHEME_MODS = [
     catppuccin,
     sonokai,
     tokyonight,
+    rose,
 ]
 CSS_PROPERTY_DELIMITER = ";\n"
 

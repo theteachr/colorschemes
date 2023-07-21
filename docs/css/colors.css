@@ -75,6 +75,17 @@
 	--cyan: hsl(202, 100%, 75%);
 	--white: hsl(230, 71%, 92%)
 }
+:root.rosé-pine {
+	--background: hsl(249, 22%, 12%);
+	--black: hsl(247, 23%, 15%);
+	--red: hsl(343, 76%, 68%);
+	--green: hsl(197, 49%, 38%);
+	--yellow: hsl(35, 88%, 72%);
+	--blue: hsl(189, 43%, 73%);
+	--magenta: hsl(267, 57%, 78%);
+	--cyan: hsl(2, 55%, 83%);
+	--white: hsl(245, 50%, 91%)
+}
 .black {
 	background: var(--black);
 }
