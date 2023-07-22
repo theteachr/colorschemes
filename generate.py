@@ -130,7 +130,7 @@ def generate_js(schemes: List[Colorscheme], out_file: str):
 
 def update_default_scheme(scheme: Colorscheme):
     variant, _ = scheme.default_variant
-    scheme_class = f"{scheme.name.lower()}-{variant}"
+    scheme_class = f"{scheme.hyphenated_name}-{variant}"
 
     with open(ENTRYPOINT_TEMPLATE) as f:
         html = f.read()

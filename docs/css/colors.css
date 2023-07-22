@@ -75,6 +75,18 @@
 	--cyan: hsl(2, 55%, 83%);
 	--white: hsl(245, 50%, 91%)
 }
+
+:root.rosé-pine-moon {
+	--background: hsl(246, 24%, 17%);
+	--black: hsl(248, 24%, 20%);
+	--red: hsl(343, 76%, 68%);
+	--green: hsl(197, 48%, 47%);
+	--yellow: hsl(35, 88%, 72%);
+	--blue: hsl(189, 43%, 73%);
+	--magenta: hsl(267, 57%, 78%);
+	--cyan: hsl(2, 66%, 75%);
+	--white: hsl(245, 50%, 91%)
+}
 :root.sonokai-andromeda {
 	--background: hsl(223, 9%, 15%);
 	--black: hsl(228, 14%, 29%);
