@@ -1,7 +1,11 @@
 const setScheme = scheme => document.documentElement.className = scheme;
+
 const schemeHeading = document.querySelector('#scheme-name');
+const schemeVariant = document.querySelector('#scheme-variant');
+
 const schemes = '<schemes>';
 const numSchemes = schemes.length;
+
 let schemeIdx = 0;
 
 function mod(num, deno) {
@@ -12,12 +16,14 @@ function nextScheme(f) {
 	schemeIdx = mod(f(schemeIdx), numSchemes);
 
 	const [schemeName, hyphenatedName, variants] = schemes[schemeIdx];
-	const className = `${hyphenatedName}-${variants[0]}`;
+	const variant = variants[0]
+	const className = `${hyphenatedName}-${variant}`;
 
 	console.log(`Setting scheme to ${schemeName} (${className})...`);
 
 	setScheme(className);
 	schemeHeading.textContent = schemeName;
+	schemeVariant.textContent = variant;
 }
 
 this.addEventListener('keypress', key => {

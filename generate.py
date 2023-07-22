@@ -136,7 +136,13 @@ def update_default_scheme(scheme: Colorscheme):
         html = f.read()
 
     with open(SITE_ENTRYPOINT, "w") as f:
-        f.write(html.format(scheme_name=scheme.name, scheme_class=scheme_class))
+        f.write(
+            html.format(
+                scheme_name=scheme.name,
+                scheme_class=scheme_class,
+                scheme_variant=variant,
+            )
+        )
 
 
 def generate_docs():
