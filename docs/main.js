@@ -1,7 +1,40 @@
 const setScheme = scheme => document.documentElement.className = scheme;
 const schemeHeading = document.querySelector('#scheme-name');
-const numSchemes = 8;
-const schemes = [['ayu-mirage', 'Ayu Mirage'], ['everforest', 'Everforest'], ['gruvbox-material', 'Gruvbox Material'], ['nightfly', 'Nightfly'], ['catppuccin', 'Catppuccin'], ['sonokai-andromeda', 'Sonokai Andromeda'], ['tokyonight', 'Tokyonight'], ['rosé-pine', 'Rosé Pine']];
+const schemes = [
+  [
+    "ayu-mirage",
+    "Ayu Mirage"
+  ],
+  [
+    "everforest",
+    "Everforest"
+  ],
+  [
+    "gruvbox-material",
+    "Gruvbox Material"
+  ],
+  [
+    "nightfly",
+    "Nightfly"
+  ],
+  [
+    "catppuccin",
+    "Catppuccin"
+  ],
+  [
+    "sonokai-andromeda",
+    "Sonokai Andromeda"
+  ],
+  [
+    "tokyonight",
+    "Tokyonight"
+  ],
+  [
+    "ros\u00e9-pine",
+    "Ros\u00e9 Pine"
+  ]
+];
+const numSchemes = schemes.length;
 let schemeIdx = 0;
 
 function mod(num, deno) {

@@ -1,3 +1,5 @@
+import json
+
 from dataclasses import dataclass
 from itertools import starmap
 from typing import Dict, List, Self, Tuple
@@ -84,9 +86,7 @@ def generate_js(schemes: List, js_out_file: str):
         js_template = f.read()
 
     class_name_pairs = [[hyphenate(scheme), scheme] for scheme in schemes]
-    num_schemes = len(class_name_pairs)
-
-    js = js_template.format(num_schemes=num_schemes, class_name_pairs=class_name_pairs)
+    js = js_template.format(class_name_pairs=json.dumps(class_name_pairs, indent=2))
 
     with open(js_out_file, "w") as f:
         f.write(js)

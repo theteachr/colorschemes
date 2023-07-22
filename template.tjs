@@ -1,7 +1,7 @@
 const setScheme = scheme => document.documentElement.className = scheme;
 const schemeHeading = document.querySelector('#scheme-name');
-const numSchemes = {num_schemes};
 const schemes = {class_name_pairs};
+const numSchemes = schemes.length;
 let schemeIdx = 0;
 
 function mod(num, deno) {{
