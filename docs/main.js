@@ -5164,7 +5164,7 @@ var $author$project$Main$Colorscheme = F2(
 	function (name, variants) {
 		return {name: name, variants: variants};
 	});
-var $author$project$Main$Ring = F3(
+var $author$project$Ring$Ring = F3(
 	function (prev, curr, next) {
 		return {curr: curr, next: next, prev: prev};
 	});
@@ -5192,7 +5192,7 @@ var $elm$json$Json$Decode$oneOrMore = F2(
 var $author$project$Main$decodeRing = function (itemDecoder) {
 	return A2(
 		$elm$json$Json$Decode$oneOrMore,
-		$author$project$Main$Ring(_List_Nil),
+		$author$project$Ring$Ring(_List_Nil),
 		itemDecoder);
 };
 var $elm$json$Json$Decode$index = _Json_decodeIndex;
@@ -5228,33 +5228,93 @@ var $author$project$Main$init = function (flags) {
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $elm$core$Debug$todo = _Debug_todo;
+var $author$project$Main$advanceVariant = F2(
+	function (advance, model) {
+		var curr = model.curr;
+		var scheme = _Utils_update(
+			curr,
+			{
+				variants: advance(curr.variants)
+			});
+		return _Utils_update(
+			model,
+			{curr: scheme});
+	});
+var $author$project$Ring$backward = function (ring) {
+	var prev = ring.prev;
+	var curr = ring.curr;
+	var next = ring.next;
+	var _v0 = _Utils_Tuple2(prev, next);
+	if (_v0.a.b) {
+		var _v1 = _v0.a;
+		var p = _v1.a;
+		var ps = _v1.b;
+		var xs = _v0.b;
+		return {
+			curr: p,
+			next: A2($elm$core$List$cons, curr, xs),
+			prev: ps
+		};
+	} else {
+		var xs = _v0.b;
+		var reversedNext = $elm$core$List$reverse(
+			A2($elm$core$List$cons, curr, xs));
+		if (reversedNext.b) {
+			var newCurr = reversedNext.a;
+			var rest = reversedNext.b;
+			return {curr: newCurr, next: _List_Nil, prev: rest};
+		} else {
+			return ring;
+		}
+	}
+};
+var $author$project$Ring$forward = function (ring) {
+	var prev = ring.prev;
+	var curr = ring.curr;
+	var next = ring.next;
+	var _v0 = _Utils_Tuple2(prev, next);
+	if (_v0.b.b) {
+		var ps = _v0.a;
+		var _v1 = _v0.b;
+		var x = _v1.a;
+		var xs = _v1.b;
+		return {
+			curr: x,
+			next: xs,
+			prev: A2($elm$core$List$cons, curr, ps)
+		};
+	} else {
+		var ps = _v0.a;
+		var reversedPrev = $elm$core$List$reverse(
+			A2($elm$core$List$cons, curr, ps));
+		if (reversedPrev.b) {
+			var newCurr = reversedPrev.a;
+			var rest = reversedPrev.b;
+			return {curr: newCurr, next: rest, prev: _List_Nil};
+		} else {
+			return ring;
+		}
+	}
+};
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'NextScheme':
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(
+					$author$project$Ring$forward(model),
+					$elm$core$Platform$Cmd$none);
 			case 'PrevScheme':
-				return _Debug_todo(
-					'Main',
-					{
-						start: {line: 76, column: 13},
-						end: {line: 76, column: 23}
-					})('branch \'PrevScheme\' not implemented');
+				return _Utils_Tuple2(
+					$author$project$Ring$backward(model),
+					$elm$core$Platform$Cmd$none);
 			case 'NextVariant':
-				return _Debug_todo(
-					'Main',
-					{
-						start: {line: 79, column: 13},
-						end: {line: 79, column: 23}
-					})('branch \'NextVariant\' not implemented');
+				return _Utils_Tuple2(
+					A2($author$project$Main$advanceVariant, $author$project$Ring$forward, model),
+					$elm$core$Platform$Cmd$none);
 			default:
-				return _Debug_todo(
-					'Main',
-					{
-						start: {line: 82, column: 13},
-						end: {line: 82, column: 23}
-					})('branch \'PrevVariant\' not implemented');
+				return _Utils_Tuple2(
+					A2($author$project$Main$advanceVariant, $author$project$Ring$backward, model),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
 var $elm$json$Json$Decode$value = _Json_decodeValue;

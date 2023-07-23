@@ -6,6 +6,7 @@ import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
+import Ring exposing (..)
 
 
 main : Program E.Value Model Msg
@@ -21,13 +22,6 @@ main =
 type alias Colorscheme =
     { name : String
     , variants : Ring String
-    }
-
-
-type alias Ring a =
-    { prev : List a
-    , curr : a
-    , next : List a
     }
 
 
@@ -66,20 +60,29 @@ type Msg
     | PrevVariant
 
 
+advanceVariant : (Ring String -> Ring String) -> Model -> Model
+advanceVariant advance ({ curr } as model) =
+    let
+        scheme =
+            { curr | variants = advance curr.variants }
+    in
+    { model | curr = scheme }
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         NextScheme ->
-            ( model, Cmd.none )
+            ( forward model, Cmd.none )
 
         PrevScheme ->
-            Debug.todo "branch 'PrevScheme' not implemented"
+            ( backward model, Cmd.none )
 
         NextVariant ->
-            Debug.todo "branch 'NextVariant' not implemented"
+            ( advanceVariant forward model, Cmd.none )
 
         PrevVariant ->
-            Debug.todo "branch 'PrevVariant' not implemented"
+            ( advanceVariant backward model, Cmd.none )
 
 
 colorNames : List String
