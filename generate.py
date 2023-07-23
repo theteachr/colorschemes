@@ -15,24 +15,10 @@ CSS_PROPERTY_DELIMITER = ";\n"
 
 ENTRYPOINT_TEMPLATE = "templates/index.html"
 SITE_ENTRYPOINT = "docs/index.html"
+COLORS_CSS = "docs/css/colors.css"
 
-# def to_json(module):
-#     try:
-#         scheme_name, variant = module.NAME.split()
-#     except:
-#         scheme_name = module.NAME
-#         variant = "default"
-
-#     config = dict(name=module.NAME, colors={variant.lower(): module.COLORS})
-#     colors_json_file = os.path.join(module.__path__[0], "colors.json")
-
-#     with open(colors_json_file, "w") as f:
-#         json.dump(config, f, indent=2, sort_keys=True)
-
-
-# for m in COLORSCHEME_JSON_FILES:
-#     to_json(m)
-
+# NOTE: This has to sync with the `id` given to the root div in Elm.
+ROOT_DIV_ID = "main"
 
 @dataclass(frozen=True)
 class HSLColor:
@@ -69,7 +55,7 @@ class Colorscheme:
 
         for variant, colors in self.variants.items():
             color_properties = starmap("\t--{}: {!r}".format, colors.items())
-            color_rules = f"""#main.{self.hyphenated_name}-{variant} {{
+            color_rules = f"""#{ROOT_DIV_ID}.{self.hyphenated_name}-{variant} {{
 {CSS_PROPERTY_DELIMITER.join(color_properties)}
 }}
 """
@@ -99,6 +85,7 @@ class Colorscheme:
 
 
 # TODO add cursor colors
+# TODO classify every variant into either dark / light
 
 
 def generate_css(colorschemes: List[Colorscheme], css_out_file: str):
@@ -113,14 +100,11 @@ def generate_css(colorschemes: List[Colorscheme], css_out_file: str):
         f.write("\n")
 
 
-def generate_js(schemes: List[Colorscheme], out_file: str):
+def generate_html(schemes: List[Colorscheme], out_file: str):
     with open(ENTRYPOINT_TEMPLATE) as f:
         content = f.read()
 
-    schemes_data = [
-        (scheme.name, scheme.variant_names)
-        for scheme in schemes
-    ]
+    schemes_data = [(scheme.name, scheme.variant_names) for scheme in schemes]
 
     with open(out_file, "w") as f:
         f.write(content % json.dumps(schemes_data))
@@ -129,8 +113,8 @@ def generate_js(schemes: List[Colorscheme], out_file: str):
 def generate_docs():
     colorschemes = [Colorscheme.from_json(m) for m in COLORSCHEME_JSON_FILES]
 
-    generate_css(colorschemes, "docs/css/colors.css")
-    generate_js(colorschemes, SITE_ENTRYPOINT)
+    generate_css(colorschemes, COLORS_CSS)
+    generate_html(colorschemes, SITE_ENTRYPOINT)
 
 
 if __name__ == "__main__":
