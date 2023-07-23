@@ -1,6 +1,7 @@
 module Main exposing (main)
 
 import Browser
+import Browser.Events exposing (onKeyPress)
 import Html exposing (Html, div, footer, h1, h2, header, li, text, ul)
 import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
@@ -15,7 +16,7 @@ main =
         { init = init
         , view = \model -> { title = "Colors", body = [ view model ] }
         , update = update
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = subscriptions
         }
 
 
@@ -23,6 +24,18 @@ type alias Colorscheme =
     { name : String
     , variants : Ring String
     }
+
+
+className : Colorscheme -> String
+className { name, variants } =
+    let
+        hyphenatedName =
+            String.replace " " "-" <| String.toLower name
+
+        variantName =
+            variants.curr
+    in
+    hyphenatedName ++ "-" ++ variantName
 
 
 type alias Model =
@@ -111,7 +124,7 @@ view { curr } =
         currVariant =
             curr.variants.curr
     in
-    div [ class "main" ]
+    div [ id "main", class (className curr) ]
         [ header []
             [ h1 [ onClick PrevScheme, id "scheme-name" ] [ text curr.name ] ]
         , viewColorDots
@@ -121,7 +134,40 @@ view { curr } =
 
 
 
--- JSON ENCODE/DECODE
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    onKeyPress getPressedKey
+
+
+
+-- DECODERS
+
+
+getPressedKey : Decoder Msg
+getPressedKey =
+    D.field "key" D.string |> D.andThen decodeMsg
+
+
+decodeMsg : String -> Decoder Msg
+decodeMsg pressed =
+    case String.uncons pressed of
+        Just ( 'h', "" ) ->
+            D.succeed PrevVariant
+
+        Just ( 'j', "" ) ->
+            D.succeed NextScheme
+
+        Just ( 'k', "" ) ->
+            D.succeed PrevScheme
+
+        Just ( 'l', "" ) ->
+            D.succeed NextVariant
+
+        _ ->
+            D.fail "Probably a control char was entered"
 
 
 decodeRing : Decoder a -> Decoder (Ring a)
