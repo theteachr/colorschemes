@@ -3,7 +3,7 @@ body {
 	margin: 0;
 }
 
-.main {
+#main {
 	background: var(--background, white);
 	display: grid;
 	grid-template-rows: 2fr 18fr 1.5fr;

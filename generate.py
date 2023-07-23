@@ -69,11 +69,11 @@ class Colorscheme:
 
         for variant, colors in self.variants.items():
             color_properties = starmap("\t--{}: {!r}".format, colors.items())
-            root_node = f""":root.{self.hyphenated_name}-{variant} {{
+            color_rules = f"""#main.{self.hyphenated_name}-{variant} {{
 {CSS_PROPERTY_DELIMITER.join(color_properties)}
 }}
 """
-            root_nodes.append(root_node)
+            root_nodes.append(color_rules)
 
         return "\n".join(root_nodes)
 
@@ -128,7 +128,6 @@ def generate_js(schemes: List[Colorscheme], out_file: str):
 
 def generate_docs():
     colorschemes = [Colorscheme.from_json(m) for m in COLORSCHEME_JSON_FILES]
-    entry_scheme = random.choice(colorschemes)
 
     generate_css(colorschemes, "docs/css/colors.css")
     generate_js(colorschemes, SITE_ENTRYPOINT)
