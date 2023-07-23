@@ -128,3 +128,4 @@ this.addEventListener('keypress', key => {
 });
 
 this.addEventListener('click', _ => nextScheme(inc))
+this.addEventListener('touchend', _ => nextScheme(inc))
