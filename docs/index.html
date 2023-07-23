@@ -1,44 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" class="rosé-pine-moon">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Colors</title>
-    <!-- TODO Use a normal favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌈</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/colors.css">
-  </head>
-  <body>
-    <header>
-      <h1 id="scheme-name">Rosé Pine</h1>
-    </header>
-    <ul class="blocks">
-      <li>
-        <div class="color-block red"></div>
-      </li>
-      <li>
-        <div class="color-block green"></div>
-      </li>
-      <li>
-        <div class="color-block yellow"></div>
-      </li>
-      <li>
-        <div class="color-block blue"></div>
-      </li>
-      <li>
-        <div class="color-block magenta"></div>
-      </li>
-      <li>
-        <div class="color-block cyan"></div>
-      </li>
-    </ul>
-    <footer>
-      <h2 id="scheme-variant">moon</h2>
-    </footer>
-    <script src="main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- TODO Use a normal favicon -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/colors.css">
+  <script type="text/javascript" src="main.js"></script>
+</head>
+
+<body></body>
+
+<script type="text/javascript">
+  var app = Elm.Main.init({flags: [["Everforest", ["dark"]], ["Catppuccin", ["default"]], ["Gruvbox", ["material"]], ["Tokyonight", ["default"]], ["Nightfox", ["night"]], ["Nightfly", ["default"]], ["Ros\u00e9 Pine", ["main", "moon"]], ["Sonokai", ["andromeda"]], ["Kanagawa", ["default"]], ["Ayu", ["mirage"]]]});
+</script>
+
 </html>

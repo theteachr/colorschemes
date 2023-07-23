@@ -1,12 +1,15 @@
 body {
+	padding: 0;
+	margin: 0;
+}
+
+.main {
 	background: var(--background, white);
 	display: grid;
 	grid-template-rows: 2fr 18fr 1.5fr;
 	grid-template-areas: "header" "blocks" "footer";
 	height: 100vh;
 	color: var(--white, black);
-	padding: 0;
-	margin: 0;
 	font-family: 'Helvetica Neue', sans-serif;
 }
 
@@ -28,7 +31,8 @@ body {
 	border-radius: 50%;
 }
 
-header, footer {
+header,
+footer {
 	background: var(--black);
 	text-transform: uppercase;
 	text-align: center;

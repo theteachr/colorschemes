@@ -114,44 +114,24 @@ def generate_css(colorschemes: List[Colorscheme], css_out_file: str):
 
 
 def generate_js(schemes: List[Colorscheme], out_file: str):
-    with open("templates/main.js") as f:
+    with open(ENTRYPOINT_TEMPLATE) as f:
         content = f.read()
 
     schemes_data = [
-        (scheme.name, scheme.hyphenated_name, scheme.variant_names)
+        (scheme.name, scheme.variant_names)
         for scheme in schemes
     ]
 
-    content = content.replace("'<schemes>'", json.dumps(schemes_data, indent=2))
-
     with open(out_file, "w") as f:
-        f.write(content)
-
-
-def update_default_scheme(scheme: Colorscheme):
-    variant, _ = scheme.default_variant
-    scheme_class = f"{scheme.hyphenated_name}-{variant}"
-
-    with open(ENTRYPOINT_TEMPLATE) as f:
-        html = f.read()
-
-    with open(SITE_ENTRYPOINT, "w") as f:
-        f.write(
-            html.format(
-                scheme_name=scheme.name,
-                scheme_class=scheme_class,
-                scheme_variant=variant,
-            )
-        )
+        f.write(content % json.dumps(schemes_data))
 
 
 def generate_docs():
     colorschemes = [Colorscheme.from_json(m) for m in COLORSCHEME_JSON_FILES]
     entry_scheme = random.choice(colorschemes)
 
-    update_default_scheme(entry_scheme)
     generate_css(colorschemes, "docs/css/colors.css")
-    generate_js(colorschemes, "docs/main.js")
+    generate_js(colorschemes, SITE_ENTRYPOINT)
 
 
 if __name__ == "__main__":
