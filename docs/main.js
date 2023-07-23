@@ -5160,65 +5160,52 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$document = _Browser_document;
 var $elm$json$Json$Decode$decodeValue = _Json_run;
-var $author$project$Main$Ring = F3(
-	function (prev, curr, next) {
-		return {curr: curr, next: next, prev: prev};
-	});
 var $author$project$Main$Colorscheme = F2(
 	function (name, variants) {
 		return {name: name, variants: variants};
 	});
-var $elm$json$Json$Decode$index = _Json_decodeIndex;
-var $elm$json$Json$Decode$list = _Json_decodeList;
-var $elm$json$Json$Decode$map3 = _Json_map3;
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
+var $author$project$Main$Ring = F3(
+	function (prev, curr, next) {
+		return {curr: curr, next: next, prev: prev};
 	});
-var $elm$core$List$tail = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(xs);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
+var $elm$json$Json$Decode$andThen = _Json_andThen;
+var $elm$json$Json$Decode$list = _Json_decodeList;
+var $elm$json$Json$Decode$fail = _Json_fail;
+var $elm$json$Json$Decode$oneOrMoreHelp = F2(
+	function (toValue, xs) {
+		if (!xs.b) {
+			return $elm$json$Json$Decode$fail('a ARRAY with at least ONE element');
 		} else {
-			return _default;
+			var y = xs.a;
+			var ys = xs.b;
+			return $elm$json$Json$Decode$succeed(
+				A2(toValue, y, ys));
 		}
 	});
-var $author$project$Main$yeetHead = A2(
-	$elm$core$Basics$composeL,
-	$elm$core$Maybe$withDefault(_List_Nil),
-	$elm$core$List$tail);
-var $author$project$Main$decodeRing = A4(
-	$elm$json$Json$Decode$map3,
-	$author$project$Main$Ring,
-	$elm$json$Json$Decode$succeed(_List_Nil),
-	A2($elm$json$Json$Decode$index, 0, $elm$json$Json$Decode$string),
-	A2(
-		$elm$json$Json$Decode$map,
-		$author$project$Main$yeetHead,
-		$elm$json$Json$Decode$list($elm$json$Json$Decode$string)));
+var $elm$json$Json$Decode$oneOrMore = F2(
+	function (toValue, decoder) {
+		return A2(
+			$elm$json$Json$Decode$andThen,
+			$elm$json$Json$Decode$oneOrMoreHelp(toValue),
+			$elm$json$Json$Decode$list(decoder));
+	});
+var $author$project$Main$decodeRing = function (itemDecoder) {
+	return A2(
+		$elm$json$Json$Decode$oneOrMore,
+		$author$project$Main$Ring(_List_Nil),
+		itemDecoder);
+};
+var $elm$json$Json$Decode$index = _Json_decodeIndex;
+var $elm$json$Json$Decode$string = _Json_decodeString;
 var $author$project$Main$decodeColorscheme = A3(
 	$elm$json$Json$Decode$map2,
 	$author$project$Main$Colorscheme,
 	A2($elm$json$Json$Decode$index, 0, $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$index, 1, $author$project$Main$decodeRing));
-var $author$project$Main$decoder = A4(
-	$elm$json$Json$Decode$map3,
-	$author$project$Main$Ring,
-	$elm$json$Json$Decode$succeed(_List_Nil),
-	A2($elm$json$Json$Decode$index, 0, $author$project$Main$decodeColorscheme),
-	$elm$json$Json$Decode$list($author$project$Main$decodeColorscheme));
+	A2(
+		$elm$json$Json$Decode$index,
+		1,
+		$author$project$Main$decodeRing($elm$json$Json$Decode$string)));
+var $author$project$Main$decoder = $author$project$Main$decodeRing($author$project$Main$decodeColorscheme);
 var $author$project$Main$defaultScheme = {
 	name: 'Rose',
 	variants: {curr: 'main', next: _List_Nil, prev: _List_Nil}

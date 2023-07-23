@@ -121,14 +121,9 @@ view { curr } =
 -- JSON ENCODE/DECODE
 
 
-yeetHead : List a -> List a
-yeetHead =
-    Maybe.withDefault [] << List.tail
-
-
-decodeRing : Decoder (Ring String)
-decodeRing =
-    D.map3 Ring (D.succeed []) (D.index 0 D.string) (D.map yeetHead (D.list D.string))
+decodeRing : Decoder a -> Decoder (Ring a)
+decodeRing itemDecoder =
+    D.oneOrMore (Ring []) itemDecoder
 
 
 
@@ -137,9 +132,9 @@ decodeRing =
 
 decodeColorscheme : Decoder Colorscheme
 decodeColorscheme =
-    D.map2 Colorscheme (D.index 0 D.string) (D.index 1 decodeRing)
+    D.map2 Colorscheme (D.index 0 D.string) (D.index 1 (decodeRing D.string))
 
 
 decoder : D.Decoder Model
 decoder =
-    D.map3 Ring (D.succeed []) (D.index 0 decodeColorscheme) (D.list decodeColorscheme)
+    decodeRing decodeColorscheme
