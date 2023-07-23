@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Browser.Events exposing (onKeyPress)
+import Browser.Events as Events
 import Html exposing (Html, div, footer, h1, h2, header, li, text, ul)
 import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
@@ -140,7 +140,10 @@ view { curr } =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    onKeyPress getPressedKey
+    Sub.batch
+        [ Events.onKeyPress getPressedKey
+        , Events.onClick <| D.succeed NextScheme
+        ]
 
 
 

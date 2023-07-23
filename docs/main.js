@@ -5221,6 +5221,7 @@ var $author$project$Main$init = function (flags) {
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Main$NextScheme = 0;
+var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $author$project$Main$NextVariant = 2;
 var $author$project$Main$PrevScheme = 1;
 var $author$project$Main$PrevVariant = 3;
@@ -5656,9 +5657,16 @@ var $elm$browser$Browser$Events$on = F3(
 		return $elm$browser$Browser$Events$subscription(
 			A3($elm$browser$Browser$Events$MySub, node, name, decoder));
 	});
+var $elm$browser$Browser$Events$onClick = A2($elm$browser$Browser$Events$on, 0, 'click');
 var $elm$browser$Browser$Events$onKeyPress = A2($elm$browser$Browser$Events$on, 0, 'keypress');
 var $author$project$Main$subscriptions = function (_v0) {
-	return $elm$browser$Browser$Events$onKeyPress($author$project$Main$getPressedKey);
+	return $elm$core$Platform$Sub$batch(
+		_List_fromArray(
+			[
+				$elm$browser$Browser$Events$onKeyPress($author$project$Main$getPressedKey),
+				$elm$browser$Browser$Events$onClick(
+				$elm$json$Json$Decode$succeed(0))
+			]));
 };
 var $author$project$Main$advanceVariant = F2(
 	function (advance, model) {
