@@ -1,6 +1,5 @@
 import json
 import os
-import random
 
 from dataclasses import dataclass
 from itertools import starmap
@@ -147,9 +146,8 @@ def update_default_scheme(scheme: Colorscheme):
 
 def generate_docs():
     colorschemes = [Colorscheme.from_json(m) for m in COLORSCHEME_JSON_FILES]
-    entry_scheme = random.choice(colorschemes)
 
-    update_default_scheme(entry_scheme)
+    update_default_scheme(colorschemes[0])
     generate_css(colorschemes, "docs/css/colors.css")
     generate_js(colorschemes, "docs/main.js")
 
