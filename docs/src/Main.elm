@@ -135,6 +135,7 @@ view { curr } =
 
 
 -- SUBSCRIPTIONS
+-- TODO: Listen for tap events
 
 
 subscriptions : Model -> Sub Msg
@@ -173,10 +174,6 @@ decodeMsg pressed =
 decodeRing : Decoder a -> Decoder (Ring a)
 decodeRing itemDecoder =
     D.oneOrMore (Ring []) itemDecoder
-
-
-
--- ['a', 'b', 'c'] ==> Ring { prev = [], curr = 'a', next = ['b', 'c']}
 
 
 decodeColorscheme : Decoder Colorscheme
