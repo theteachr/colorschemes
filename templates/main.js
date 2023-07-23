@@ -42,13 +42,18 @@ function nextVariant(f) {
 	schemeVariant.textContent = variant;
 }
 
+const inc = i => i + 1
+const dec = i => i - 1
 
 this.addEventListener('keypress', key => {
 	switch (key.key) {
 		case " ":
-		case "j": nextScheme(i => i + 1); break;
-		case "k": nextScheme(i => i - 1); break;
-		case "h": nextVariant(i => i - 1); break;
-		case "l": nextVariant(i => i + 1); break;
+		case "j": nextScheme(inc); break;
+		case "k": nextScheme(dec); break;
+		case "h": nextVariant(dec); break;
+		case "l": nextVariant(inc); break;
 	}
 });
+
+this.addEventListener('click', _ => nextScheme(inc))
+this.addEventListener('touchend', _ => nextScheme(inc))
