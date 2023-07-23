@@ -146,6 +146,25 @@ subscriptions _ =
         ]
 
 
+msgFromChar : Char -> Maybe Msg
+msgFromChar c =
+    case c of
+        'h' ->
+            Just PrevVariant
+
+        'j' ->
+            Just NextScheme
+
+        'k' ->
+            Just PrevScheme
+
+        'l' ->
+            Just NextVariant
+
+        _ ->
+            Nothing
+
+
 
 -- DECODERS
 
@@ -158,17 +177,13 @@ getPressedKey =
 decodeMsg : String -> Decoder Msg
 decodeMsg pressed =
     case String.uncons pressed of
-        Just ( 'h', "" ) ->
-            D.succeed PrevVariant
+        Just ( c, "" ) ->
+            case msgFromChar c of
+                Just msg ->
+                    D.succeed msg
 
-        Just ( 'j', "" ) ->
-            D.succeed NextScheme
-
-        Just ( 'k', "" ) ->
-            D.succeed PrevScheme
-
-        Just ( 'l', "" ) ->
-            D.succeed NextVariant
+                Nothing ->
+                    D.fail "Unsupported key"
 
         _ ->
             D.fail "Probably a control char was entered"

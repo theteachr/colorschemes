@@ -5225,32 +5225,35 @@ var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $author$project$Main$NextVariant = 2;
 var $author$project$Main$PrevScheme = 1;
 var $author$project$Main$PrevVariant = 3;
+var $author$project$Main$msgFromChar = function (c) {
+	switch (c) {
+		case 'h':
+			return $elm$core$Maybe$Just(3);
+		case 'j':
+			return $elm$core$Maybe$Just(0);
+		case 'k':
+			return $elm$core$Maybe$Just(1);
+		case 'l':
+			return $elm$core$Maybe$Just(2);
+		default:
+			return $elm$core$Maybe$Nothing;
+	}
+};
 var $author$project$Main$decodeMsg = function (pressed) {
 	var _v0 = $elm$core$String$uncons(pressed);
-	_v0$4:
-	while (true) {
-		if ((!_v0.$) && (_v0.a.b === '')) {
-			switch (_v0.a.a) {
-				case 'h':
-					var _v1 = _v0.a;
-					return $elm$json$Json$Decode$succeed(3);
-				case 'j':
-					var _v2 = _v0.a;
-					return $elm$json$Json$Decode$succeed(0);
-				case 'k':
-					var _v3 = _v0.a;
-					return $elm$json$Json$Decode$succeed(1);
-				case 'l':
-					var _v4 = _v0.a;
-					return $elm$json$Json$Decode$succeed(2);
-				default:
-					break _v0$4;
-			}
+	if ((!_v0.$) && (_v0.a.b === '')) {
+		var _v1 = _v0.a;
+		var c = _v1.a;
+		var _v2 = $author$project$Main$msgFromChar(c);
+		if (!_v2.$) {
+			var msg = _v2.a;
+			return $elm$json$Json$Decode$succeed(msg);
 		} else {
-			break _v0$4;
+			return $elm$json$Json$Decode$fail('Unsupported key');
 		}
+	} else {
+		return $elm$json$Json$Decode$fail('Probably a control char was entered');
 	}
-	return $elm$json$Json$Decode$fail('Probably a control char was entered');
 };
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $author$project$Main$getPressedKey = A2(
