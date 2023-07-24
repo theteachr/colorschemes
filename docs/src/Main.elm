@@ -12,9 +12,9 @@ import Ring exposing (..)
 
 main : Program E.Value Model Msg
 main =
-    Browser.document
+    Browser.element
         { init = init
-        , view = \model -> { title = "Colors", body = [ view model ] }
+        , view = view
         , update = update
         , subscriptions = subscriptions
         }

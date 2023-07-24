@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Colors</title>
   <!-- TODO Use a normal favicon -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,10 +14,10 @@
   <script type="text/javascript" src="main.js"></script>
 </head>
 
-<body></body>
+<body id="%(root_div_id)s"></body>
 
 <script type="text/javascript">
-  var app = Elm.Main.init({flags: %s});
+  var app = Elm.Main.init({node: document.body, flags: %(schemes_data)s});
 </script>
 
 </html>

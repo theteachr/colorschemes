@@ -20,6 +20,7 @@ COLORS_CSS = "docs/css/colors.css"
 # NOTE: This has to sync with the `id` given to the root div in Elm.
 ROOT_DIV_ID = "main"
 
+
 @dataclass(frozen=True)
 class HSLColor:
     hue: int
@@ -105,9 +106,10 @@ def generate_html(schemes: List[Colorscheme], out_file: str):
         content = f.read()
 
     schemes_data = [(scheme.name, scheme.variant_names) for scheme in schemes]
+    data = dict(schemes_data=json.dumps(schemes_data), root_div_id=ROOT_DIV_ID)
 
     with open(out_file, "w") as f:
-        f.write(content % json.dumps(schemes_data))
+        f.write(content % data)
 
 
 def generate_docs():
