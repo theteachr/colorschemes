@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Colors</title>
-  <!-- TODO Use a normal favicon -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap" rel="stylesheet">
@@ -17,10 +16,12 @@
   <script type="text/javascript" src="main.js"></script>
 </head>
 
-<body id="main"></body>
+<body>
+  <div id="main"></div>
+</body>
 
 <script type="text/javascript">
-  var app = Elm.Main.init({node: document.body, flags: [["Everforest", ["dark"]], ["Catppuccin", ["default"]], ["Gruvbox", ["material"]], ["Tokyonight", ["default"]], ["Nightfox", ["night"]], ["Nightfly", ["default"]], ["Ros\u00e9 Pine", ["main", "moon"]], ["Sonokai", ["andromeda"]], ["Kanagawa", ["default"]], ["Ayu", ["mirage"]]]});
+  var app = Elm.Main.init({node: document.getElementById("main"), flags: [["Everforest", ["dark"]], ["Catppuccin", ["default"]], ["Gruvbox", ["material"]], ["Tokyonight", ["default"]], ["Nightfox", ["night"]], ["Nightfly", ["default"]], ["Ros\u00e9 Pine", ["main", "moon"]], ["Sonokai", ["andromeda"]], ["Kanagawa", ["default"]], ["Ayu", ["mirage"]]]});
 </script>
 
 </html>
