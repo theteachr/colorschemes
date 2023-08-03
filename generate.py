@@ -1,15 +1,15 @@
 import json
-import os
-import random
 
 from dataclasses import dataclass
 from itertools import starmap
 from typing import Dict, List, Self, Tuple
-from constants import COLORS
 
-COLORSCHEME_JSON_FILES = [
-    "schemes/{}/colors.json".format(d) for d in next(os.walk("schemes"))[1]
-]
+from constants import COLORS
+from shell_utils import list_dirs
+
+COLORSCHEME_JSON_FILES = sorted(
+    ["schemes/{}/colors.json".format(dirr) for dirr in list_dirs("schemes")]
+)
 
 CSS_PROPERTY_DELIMITER = ";\n"
 

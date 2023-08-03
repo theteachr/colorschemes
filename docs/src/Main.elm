@@ -4,7 +4,6 @@ import Browser
 import Browser.Events as Events
 import Html exposing (Html, div, footer, h1, h2, header, li, text, ul)
 import Html.Attributes exposing (class, id)
-import Html.Events exposing (onClick)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Ring exposing (..)
@@ -126,7 +125,7 @@ view { curr } =
     in
     div [ id "main", class (className curr) ]
         [ header []
-            [ h1 [ onClick PrevScheme, id "scheme-name" ] [ text curr.name ] ]
+            [ h1 [ id "scheme-name" ] [ text curr.name ] ]
         , viewColorDots
         , footer []
             [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
