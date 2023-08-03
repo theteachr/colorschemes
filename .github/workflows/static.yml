@@ -38,9 +38,6 @@ jobs:
         with:
           path: 'docs'
       - name: Compile Elm
-        uses: jorelali/setup-elm@v5
-        with:
-          elm-version: 0.19.1
         run: elm make src/Main.elm --optimize --output=main.js
       - name: Deploy to GitHub Pages
         id: deployment
