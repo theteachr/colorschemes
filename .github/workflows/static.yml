@@ -42,7 +42,7 @@ jobs:
         with:
           elm-version: 0.19.1
       - name: Transpile Elm
-        run: elm make src/Main.elm --optimize --output=main.js
+        run: ls; elm make src/Main.elm --optimize --output=main.js
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
