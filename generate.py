@@ -8,7 +8,7 @@ from constants import COLORS
 from shell_utils import list_dirs
 
 COLORSCHEME_JSON_FILES = sorted(
-    ["schemes/{}/colors.json".format(dirr) for dirr in list_dirs("schemes")]
+    ["schemes/{}/colors.json".format(dir_) for dir_ in list_dirs("schemes")]
 )
 
 CSS_PROPERTY_DELIMITER = ";\n"
