@@ -1,1 +1,1 @@
-docs/*.elm linguist-language=elm
+*.elm linguist-language=elm
