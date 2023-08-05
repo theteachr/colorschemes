@@ -11,14 +11,14 @@ COLORSCHEME_JSON_FILES = sorted(
     ["schemes/{}/colors.json".format(dir_) for dir_ in list_dirs("schemes")]
 )
 
-CSS_PROPERTY_DELIMITER = ";\n"
-
 ENTRYPOINT_TEMPLATE = "templates/index.html"
 SITE_ENTRYPOINT = "docs/index.html"
 COLORS_CSS = "docs/css/colors.css"
 
 # NOTE: This has to sync with the `id` given to the root div in Elm.
 ROOT_DIV_ID = "main"
+
+NEWLINE = "\n"
 
 
 @dataclass(frozen=True)
@@ -55,14 +55,14 @@ class Colorscheme:
         root_nodes = []
 
         for variant, colors in self.variants.items():
-            color_properties = starmap("\t--{}: {!r}".format, colors.items())
+            color_properties = starmap("\t--{}: {!r};".format, colors.items())
             color_rules = f"""#{ROOT_DIV_ID}.{self.hyphenated_name}-{variant} {{
-{CSS_PROPERTY_DELIMITER.join(color_properties)}
+{NEWLINE.join(color_properties)}
 }}
 """
             root_nodes.append(color_rules)
 
-        return "\n".join(root_nodes)
+        return NEWLINE.join(root_nodes)
 
     @property
     def hyphenated_name(self) -> str:
@@ -91,14 +91,14 @@ class Colorscheme:
 
 def generate_css(colorschemes: List[Colorscheme], css_out_file: str):
     roots = [colorscheme.to_css_root() for colorscheme in colorschemes]
-    color_classes = "\n".join(
+    color_classes = NEWLINE.join(
         map(".{0} {{\n\tbackground: var(--{0});\n}}".format, COLORS)
     )
 
     with open(css_out_file, "w") as f:
         f.writelines(roots)
         f.write(color_classes)
-        f.write("\n")
+        f.write(NEWLINE)
 
 
 def generate_html(schemes: List[Colorscheme], out_file: str):
