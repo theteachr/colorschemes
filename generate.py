@@ -12,8 +12,8 @@ COLORSCHEME_JSON_FILES = sorted(
 )
 
 ENTRYPOINT_TEMPLATE = "templates/index.html"
-SITE_ENTRYPOINT = "docs/index.html"
-COLORS_CSS = "docs/css/colors.css"
+SITE_ENTRYPOINT = "colors/index.html"
+COLORS_CSS = "colors/css/colors.css"
 
 # NOTE: This has to sync with the `id` given to the root div in Elm.
 ROOT_DIV_ID = "main"
@@ -112,7 +112,7 @@ def generate_html(schemes: List[Colorscheme], out_file: str):
         f.write(content % data)
 
 
-def generate_docs():
+def generate_site():
     colorschemes = [Colorscheme.from_json(m) for m in COLORSCHEME_JSON_FILES]
 
     generate_css(colorschemes, COLORS_CSS)
@@ -120,4 +120,4 @@ def generate_docs():
 
 
 if __name__ == "__main__":
-    generate_docs()
+    generate_site()
