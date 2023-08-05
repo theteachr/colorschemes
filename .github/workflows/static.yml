@@ -24,6 +24,8 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
+    env:
+      SITE_DIR: docs
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -44,12 +46,11 @@ jobs:
         with:
           elm-version: 0.19.1
       - name: Compile Elm
-        run: elm make src/Main.elm --optimize --output=main.js
+        run: cd $SITE_DIR; elm make src/Main.elm --optimize --output=main.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload entire repository
-          path: 'docs'
+          path: ${{ env.SITE_DIR }}
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
