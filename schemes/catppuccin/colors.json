@@ -1,7 +1,7 @@
 {
   "name": "Catppuccin",
   "colors": {
-    "default": {
+    "mocha": {
       "background": [
         254,
         25,
