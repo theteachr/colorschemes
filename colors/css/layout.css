@@ -6,13 +6,8 @@ body {
 #main {
 	background: var(--background, white);
 	display: grid;
-	grid-template-rows: 2fr 1fr 2fr 1fr 1.5fr;
-	grid-template-areas:
-		"header header header"
-		". prev-scheme ."
-		"prev-variant blocks next-variant"
-		". next-scheme ."
-		"footer footer footer";
+	grid-template-rows: 3fr 2fr 4fr 2fr 1fr;
+	grid-template-columns: 1fr 3fr 1fr;
 	height: 100vh;
 	color: var(--white, black);
 	font-family: 'Helvetica Neue', sans-serif;
@@ -26,7 +21,7 @@ body {
 	gap: 1.5rem;
 	flex-wrap: wrap;
 	place-self: center;
-	grid-area: blocks;
+	grid-row-start: 3;
 }
 
 .color-block {
@@ -48,11 +43,11 @@ footer {
 }
 
 header {
-	grid-area: header;
+	grid-column: 1 / span 3;
 }
 
 footer {
-	grid-area: footer;
+	grid-column: 1 / span 3;
 }
 
 button {
@@ -65,8 +60,16 @@ button {
 	background: var(--black);
 }
 
+.prev-scheme, .next-scheme {
+	grid-column: 1 / span 3;
+}
+
 .prev-scheme {
-	grid-area: prev-scheme;
+	grid-row-start: 2;
+}
+
+.next-scheme {
+	grid-row-start: 4;
 }
 
 .center-everything {
@@ -79,14 +82,15 @@ button.prev-scheme, button.next-scheme {
 	transform: rotate(90deg);
 }
 
-.prev-variant {
-	grid-area: prev-variant;
+.prev-variant, .next-variant {
+	grid-row: 2 / span 3;
+	grid-column-end: span 1;
 }
 
-.next-scheme {
-	grid-area: next-scheme;
+.prev-variant {
+	grid-column-start: 1;
 }
 
 .next-variant {
-	grid-area: next-variant;
+	grid-column-start: 3;
 }
