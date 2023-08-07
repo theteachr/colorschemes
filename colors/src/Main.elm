@@ -3,6 +3,7 @@ module Main exposing (main)
 import Browser
 import Browser.Events as Events
 import Html exposing (Html, div, footer, h1, h2, header, li, text, ul)
+import Html.Events exposing (onClick)
 import Html.Attributes exposing (class, id)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
@@ -123,7 +124,7 @@ view { curr } =
         currVariant =
             curr.variants.curr
     in
-    div [ id "main", class (className curr) ]
+    div [ id "main", class (className curr), onClick NextScheme ]
         [ header []
             [ h1 [ id "scheme-name" ] [ text curr.name ] ]
         , viewColorDots
@@ -139,10 +140,7 @@ view { curr } =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Sub.batch
-        [ Events.onKeyPress getPressedKey
-        , Events.onClick <| D.succeed NextScheme
-        ]
+    Events.onKeyPress getPressedKey
 
 
 msgFromChar : Char -> Maybe Msg
