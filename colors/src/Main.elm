@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Browser.Events as Events
-import Html exposing (Html, div, footer, h1, h2, header, li, text, ul)
+import Html exposing (Html, div, footer, h1, h2, header, li, text, ul, button)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (class, id)
 import Json.Decode as D exposing (Decoder)
@@ -110,6 +110,35 @@ colorBlock colorName =
         ]
 
 
+-- VIEW
+
+view : Model -> Html Msg
+view { curr } =
+    let
+        currVariant =
+            curr.variants.curr
+    in
+    div [ id "main", class (className curr) ]
+        [ header [ class "center-everything" ]
+            [ h1 [ id "scheme-name" ] [ text curr.name ] ]
+        , viewNavButton "❰" PrevScheme "prev-scheme" True
+        , viewNavButton "❰" PrevVariant "prev-variant" False
+        , viewColorDots
+        , viewNavButton "❱" NextVariant "next-variant" False
+        , viewNavButton "❱" NextScheme "next-scheme" True
+        , footer [ class "center-everything" ]
+            [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
+        ]
+
+
+viewNavButton txt msg cls tilt =
+    let
+        buttonAttrs = if tilt then [ class cls ] else []
+    in
+    div [ onClick msg, class cls, class "center-everything", class "btn-wrapper" ]
+        [ button buttonAttrs [ text txt ] ]
+
+
 viewColorDots : Html Msg
 viewColorDots =
     ul [ class "blocks" ]
@@ -118,25 +147,7 @@ viewColorDots =
         )
 
 
-view : Model -> Html Msg
-view { curr } =
-    let
-        currVariant =
-            curr.variants.curr
-    in
-    div [ id "main", class (className curr), onClick NextScheme ]
-        [ header []
-            [ h1 [ id "scheme-name" ] [ text curr.name ] ]
-        , viewColorDots
-        , footer []
-            [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
-        ]
-
-
-
 -- SUBSCRIPTIONS
--- TODO: Listen for tap events
-
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
