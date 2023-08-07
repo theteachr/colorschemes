@@ -6,8 +6,13 @@ body {
 #main {
 	background: var(--background, white);
 	display: grid;
-	grid-template-rows: 2fr 18fr 1.5fr;
-	grid-template-areas: "header" "blocks" "footer";
+	grid-template-rows: 2fr 1fr 2fr 1fr 1.5fr;
+	grid-template-areas:
+		"header header header"
+		". prev-scheme ."
+		"prev-variant blocks next-variant"
+		". next-scheme ."
+		"footer footer footer";
 	height: 100vh;
 	color: var(--white, black);
 	font-family: 'Helvetica Neue', sans-serif;
@@ -48,4 +53,40 @@ header {
 
 footer {
 	grid-area: footer;
+}
+
+button {
+	background: none;
+	color: var(--white);
+	border: none;
+}
+
+.btn-wrapper:hover {
+	background: var(--black);
+}
+
+.prev-scheme {
+	grid-area: prev-scheme;
+}
+
+.center-everything {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button.prev-scheme, button.next-scheme {
+	transform: rotate(90deg);
+}
+
+.prev-variant {
+	grid-area: prev-variant;
+}
+
+.next-scheme {
+	grid-area: next-scheme;
+}
+
+.next-variant {
+	grid-area: next-variant;
 }
