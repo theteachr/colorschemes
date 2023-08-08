@@ -119,14 +119,14 @@ view { curr } =
             curr.variants.curr
     in
     div [ id "main", class (className curr) ]
-        [ header [ class "center-everything" ]
+        [ header [ class "center-everything", onClick NextScheme ]
             [ h1 [ id "scheme-name" ] [ text curr.name ] ]
         , viewNavButton "❰" PrevScheme "prev-scheme" True
         , viewNavButton "❰" PrevVariant "prev-variant" False
         , viewColorDots
         , viewNavButton "❱" NextVariant "next-variant" False
         , viewNavButton "❱" NextScheme "next-scheme" True
-        , footer [ class "center-everything" ]
+        , footer [ class "center-everything", onClick NextVariant ]
             [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
         ]
 
