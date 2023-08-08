@@ -2,9 +2,9 @@ module Main exposing (main)
 
 import Browser
 import Browser.Events as Events
-import Html exposing (Html, div, footer, h1, h2, header, li, text, ul, button)
-import Html.Events exposing (onClick)
+import Html exposing (Html, button, div, footer, h1, h2, header, li, text, ul)
 import Html.Attributes exposing (class, id)
+import Html.Events exposing (onClick)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Ring exposing (..)
@@ -110,7 +110,9 @@ colorBlock colorName =
         ]
 
 
+
 -- VIEW
+
 
 view : Model -> Html Msg
 view { curr } =
@@ -131,9 +133,17 @@ view { curr } =
         ]
 
 
+viewNavButton : String -> Msg -> String -> Bool -> Html Msg
 viewNavButton txt msg cls tilt =
     let
-        buttonAttrs = if tilt then [ class cls ] else []
+        tiltClass =
+            if tilt then
+                [ class cls ]
+
+            else
+                []
+
+        buttonAttrs = class "center-everything" :: tiltClass
     in
     div [ onClick msg, class cls, class "center-everything", class "btn-wrapper" ]
         [ button buttonAttrs [ text txt ] ]
@@ -147,7 +157,9 @@ viewColorDots =
         )
 
 
+
 -- SUBSCRIPTIONS
+
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
