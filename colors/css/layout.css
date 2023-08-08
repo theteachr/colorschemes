@@ -6,7 +6,7 @@ body {
 #main {
 	background: var(--background, white);
 	display: grid;
-	grid-template-rows: 3fr 2fr 4fr 2fr 1fr;
+	grid-template-rows: 2fr 1fr 4fr 1fr 1fr;
 	grid-template-columns: 1fr 3fr 1fr;
 	height: 100vh;
 	color: var(--white, black);
@@ -51,16 +51,19 @@ footer {
 }
 
 button {
+	--size: 72px;
+	width: var(--size);
+	height: var(--size);
 	background: none;
 	color: var(--white);
 	border: none;
+	padding: 2rem;
+	border-radius: 1.5rem;
+	background: var(--background);
 }
 
-.btn-wrapper:hover {
-	background: var(--black);
-}
-
-.prev-scheme, .next-scheme {
+.prev-scheme,
+.next-scheme {
 	grid-column: 1 / span 3;
 }
 
@@ -78,11 +81,13 @@ button {
 	align-items: center;
 }
 
-button.prev-scheme, button.next-scheme {
+button.prev-scheme,
+button.next-scheme {
 	transform: rotate(90deg);
 }
 
-.prev-variant, .next-variant {
+.prev-variant,
+.next-variant {
 	grid-row: 2 / span 3;
 	grid-column-end: span 1;
 }
