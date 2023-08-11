@@ -12,8 +12,8 @@ type Arrow
     | Right
 
 
-viewArrow : Arrow -> Html msg
-viewArrow arrow =
+viewArrow : Arrow -> List String -> Html msg
+viewArrow arrow classes =
     let
         rotate =
             case arrow of
@@ -28,8 +28,11 @@ viewArrow arrow =
 
                 Right ->
                     "rotate(0)"
+
+        arrowAttrs =
+            [ "arrow", "center-everything" ] |> List.append classes |> List.map class
     in
-    div [ class "arrow center-everything" ]
+    div arrowAttrs
         [ Svg.svg
             [ width "24"
             , height "24"
