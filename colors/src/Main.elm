@@ -1,8 +1,9 @@
 module Main exposing (main)
 
+import Arrow exposing (Arrow, viewArrow)
 import Browser
 import Browser.Events as Events
-import Html exposing (Html, button, div, footer, h1, h2, header, li, text, ul)
+import Html exposing (Html, div, footer, h1, h2, header, li, text, ul)
 import Html.Attributes exposing (class, id)
 import Html.Events exposing (onClick)
 import Json.Decode as D exposing (Decoder)
@@ -123,30 +124,40 @@ view { curr } =
     div [ id "main", class (className curr) ]
         [ header [ class "center-everything", onClick NextScheme ]
             [ h1 [ id "scheme-name" ] [ text curr.name ] ]
-        , viewNavButton "❰" PrevScheme "prev-scheme" True
-        , viewNavButton "❰" PrevVariant "prev-variant" False
+        , viewPrevSchemeButton
+        , viewPrevVariantButton
         , viewColorDots
-        , viewNavButton "❱" NextVariant "next-variant" False
-        , viewNavButton "❱" NextScheme "next-scheme" True
+        , viewNextVariantButton
+        , viewNextSchemeButton
         , footer [ class "center-everything", onClick NextVariant ]
             [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
         ]
 
 
-viewNavButton : String -> Msg -> String -> Bool -> Html Msg
-viewNavButton txt msg cls tilt =
-    let
-        tiltClass =
-            if tilt then
-                [ class cls ]
+viewPrevSchemeButton : Html Msg
+viewPrevSchemeButton =
+    viewNavButton Arrow.Up "prev-scheme" PrevScheme
 
-            else
-                []
 
-        buttonAttrs = class "center-everything" :: tiltClass
-    in
+viewPrevVariantButton : Html Msg
+viewPrevVariantButton =
+    viewNavButton Arrow.Left "prev-variant" PrevVariant
+
+
+viewNextSchemeButton : Html Msg
+viewNextSchemeButton =
+    viewNavButton Arrow.Down "next-scheme" NextScheme
+
+
+viewNextVariantButton : Html Msg
+viewNextVariantButton =
+    viewNavButton Arrow.Right "next-variant" NextVariant
+
+
+viewNavButton : Arrow -> String -> Msg -> Html Msg
+viewNavButton arrow cls msg =
     div [ onClick msg, class cls, class "center-everything", class "btn-wrapper" ]
-        [ button buttonAttrs [ text txt ] ]
+        [ viewArrow arrow ]
 
 
 viewColorDots : Html Msg

@@ -1,3 +1,7 @@
+:root {
+	--translation-amount: 16%;
+}
+
 body {
 	padding: 0;
 	margin: 0;
@@ -50,16 +54,33 @@ footer {
 	grid-column: 1 / span 3;
 }
 
-button {
-	--size: 72px;
+.arrow {
+	--size: 64px;
 	width: var(--size);
 	height: var(--size);
-	background: none;
 	color: var(--white);
 	border: none;
 	padding: 2rem;
 	border-radius: 1.5rem;
-	background: var(--background);
+	transform-origin: center center;
+	transition: transform 360ms;
+}
+
+.btn-wrapper:active>.arrow {
+	transform: translate(var(--translation));
+}
+
+
+.center-everything {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.prev-variant,
+.next-variant {
+	grid-row: 2 / span 3;
+	grid-column-end: span 1;
 }
 
 .prev-scheme,
@@ -69,33 +90,20 @@ button {
 
 .prev-scheme {
 	grid-row-start: 2;
+	--translation: 0, calc(var(--translation-amount) * -1);
 }
 
 .next-scheme {
 	grid-row-start: 4;
-}
-
-.center-everything {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-button.prev-scheme,
-button.next-scheme {
-	transform: rotate(90deg);
-}
-
-.prev-variant,
-.next-variant {
-	grid-row: 2 / span 3;
-	grid-column-end: span 1;
+	--translation: 0, var(--translation-amount);
 }
 
 .prev-variant {
 	grid-column-start: 1;
+	--translation: calc(var(--translation-amount) * -1), 0;
 }
 
 .next-variant {
 	grid-column-start: 3;
+	--translation: var(--translation-amount), 0;
 }
