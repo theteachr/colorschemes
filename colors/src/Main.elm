@@ -43,6 +43,11 @@ type alias Model =
     Ring Colorscheme
 
 
+type ButtonState
+    = Enabled
+    | Disabled
+
+
 defaultScheme : Colorscheme
 defaultScheme =
     { name = "Rose"
@@ -157,33 +162,53 @@ view { curr } =
         currVariant =
             curr.variants.curr
 
-        singleVariantAvailable =
-            Ring.length curr.variants == 1
+        variantNavButtonState =
+            if Ring.length curr.variants == 1 then
+                Disabled
+
+            else
+                Enabled
     in
     div [ id "main", class (className curr) ]
         [ header [ class "center-everything", onClick NextScheme ]
             [ h1 [ id "scheme-name" ] [ text curr.name ] ]
-        , viewNavButton False PrevScheme
-        , viewNavButton False NextScheme
+        , viewNavButton Enabled PrevScheme
+        , viewNavButton Enabled NextScheme
         , viewColorDots
-        , viewNavButton singleVariantAvailable PrevVariant
-        , viewNavButton singleVariantAvailable NextVariant
+        , viewNavButton variantNavButtonState PrevVariant
+        , viewNavButton variantNavButtonState NextVariant
         , footer [ class "center-everything", onClick NextVariant ]
             [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
         ]
 
 
-viewNavButton : Bool -> Msg -> Html Msg
-viewNavButton disabled msg =
+viewNavButton : ButtonState -> Msg -> Html Msg
+viewNavButton state msg =
     let
-        arrowAttrs = if disabled then [ "disabled" ] else []
+        -- Appending the `onClick` attribute to a list of common attributes
+        -- when the state is `Enabled` didn't work.
+        -- Dealing with the repetition :(
+        ( arrowAttrs, wrapperAttrs ) =
+            case state of
+                Disabled ->
+                    ( [ "disabled" ]
+                    , [ classOfMsg msg
+                      , class "center-everything"
+                      , class "btn-wrapper"
+                      ]
+                    )
+
+                Enabled ->
+                    ( []
+                    , [ onClick msg
+                      , classOfMsg msg
+                      , class "center-everything"
+                      , class "btn-wrapper"
+                      ]
+                    )
     in
     div
-        [ onClick msg
-        , classOfMsg msg
-        , class "center-everything"
-        , class "btn-wrapper"
-        ]
+        wrapperAttrs
         [ viewArrow (arrowOfMsg msg) arrowAttrs ]
 
 
