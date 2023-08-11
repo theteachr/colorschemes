@@ -54,12 +54,17 @@ button {
 	--size: 72px;
 	width: var(--size);
 	height: var(--size);
-	background: none;
 	color: var(--white);
 	border: none;
 	padding: 2rem;
 	border-radius: 1.5rem;
-	background: var(--background);
+	background: none;
+	transition: transform 360ms;
+}
+
+button:active,
+.btn-wrapper:active>button {
+	transform: translate(var(--translation));
 }
 
 .prev-scheme,
@@ -69,21 +74,18 @@ button {
 
 .prev-scheme {
 	grid-row-start: 2;
+	--translation: 0, -24%;
 }
 
 .next-scheme {
 	grid-row-start: 4;
+	--translation: 0, 24%;
 }
 
 .center-everything {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-button.prev-scheme,
-button.next-scheme {
-	transform: rotate(90deg);
 }
 
 .prev-variant,
@@ -94,8 +96,10 @@ button.next-scheme {
 
 .prev-variant {
 	grid-column-start: 1;
+	--translation: -24%, 0;
 }
 
 .next-variant {
 	grid-column-start: 3;
+	--translation: 24%, 0;
 }

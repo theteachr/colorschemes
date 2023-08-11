@@ -123,30 +123,20 @@ view { curr } =
     div [ id "main", class (className curr) ]
         [ header [ class "center-everything", onClick NextScheme ]
             [ h1 [ id "scheme-name" ] [ text curr.name ] ]
-        , viewNavButton "❰" PrevScheme "prev-scheme" True
-        , viewNavButton "❰" PrevVariant "prev-variant" False
+        , viewNavButton "🡹" "prev-scheme" PrevScheme
+        , viewNavButton "🡸" "prev-variant" PrevVariant
         , viewColorDots
-        , viewNavButton "❱" NextVariant "next-variant" False
-        , viewNavButton "❱" NextScheme "next-scheme" True
+        , viewNavButton "🡺" "next-variant" NextVariant
+        , viewNavButton "🡻" "next-scheme" NextScheme
         , footer [ class "center-everything", onClick NextVariant ]
             [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
         ]
 
 
-viewNavButton : String -> Msg -> String -> Bool -> Html Msg
-viewNavButton txt msg cls tilt =
-    let
-        tiltClass =
-            if tilt then
-                [ class cls ]
-
-            else
-                []
-
-        buttonAttrs = class "center-everything" :: tiltClass
-    in
+viewNavButton : String -> String -> Msg -> Html Msg
+viewNavButton txt cls msg =
     div [ onClick msg, class cls, class "center-everything", class "btn-wrapper" ]
-        [ button buttonAttrs [ text txt ] ]
+        [ button [ class cls, class "center-everything" ] [ text txt ] ]
 
 
 viewColorDots : Html Msg
