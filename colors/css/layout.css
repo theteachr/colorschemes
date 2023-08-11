@@ -54,6 +54,10 @@ footer {
 	grid-column: 1 / span 3;
 }
 
+svg>g {
+	transform-origin: center;
+}
+
 .arrow {
 	--size: 32px;
 	width: var(--size);
