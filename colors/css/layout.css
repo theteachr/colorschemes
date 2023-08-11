@@ -14,6 +14,7 @@ body {
 	grid-template-columns: 1fr 3fr 1fr;
 	color: var(--white, black);
 	font-family: 'Helvetica Neue', sans-serif;
+	min-height: 100vh;
 }
 
 .blocks {
