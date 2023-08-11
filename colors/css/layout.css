@@ -54,7 +54,7 @@ footer {
 	grid-column: 1 / span 3;
 }
 
-svg>g {
+.arrow>svg>g {
 	transform-origin: center;
 }
 
