@@ -99,6 +99,42 @@ update msg model =
             ( advanceVariant backward model, Cmd.none )
 
 
+arrowOfMsg : Msg -> Arrow
+arrowOfMsg msg =
+    case msg of
+        PrevScheme ->
+            Arrow.Up
+
+        NextScheme ->
+            Arrow.Down
+
+        PrevVariant ->
+            Arrow.Left
+
+        NextVariant ->
+            Arrow.Right
+
+
+classOfMsg : Msg -> Html.Attribute msg
+classOfMsg msg =
+    let
+        msgClass =
+            case msg of
+                PrevScheme ->
+                    "prev-scheme"
+
+                NextScheme ->
+                    "next-scheme"
+
+                PrevVariant ->
+                    "prev-variant"
+
+                NextVariant ->
+                    "next-variant"
+    in
+    class msgClass
+
+
 colorNames : List String
 colorNames =
     [ "red", "green", "yellow", "blue", "magenta", "cyan" ]
@@ -120,44 +156,35 @@ view { curr } =
     let
         currVariant =
             curr.variants.curr
+
+        singleVariantAvailable =
+            Ring.length curr.variants == 1
     in
     div [ id "main", class (className curr) ]
         [ header [ class "center-everything", onClick NextScheme ]
             [ h1 [ id "scheme-name" ] [ text curr.name ] ]
-        , viewPrevSchemeButton
-        , viewPrevVariantButton
+        , viewNavButton False PrevScheme
+        , viewNavButton False NextScheme
         , viewColorDots
-        , viewNextVariantButton
-        , viewNextSchemeButton
+        , viewNavButton singleVariantAvailable PrevVariant
+        , viewNavButton singleVariantAvailable NextVariant
         , footer [ class "center-everything", onClick NextVariant ]
             [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
         ]
 
 
-viewPrevSchemeButton : Html Msg
-viewPrevSchemeButton =
-    viewNavButton Arrow.Up "prev-scheme" PrevScheme
-
-
-viewPrevVariantButton : Html Msg
-viewPrevVariantButton =
-    viewNavButton Arrow.Left "prev-variant" PrevVariant
-
-
-viewNextSchemeButton : Html Msg
-viewNextSchemeButton =
-    viewNavButton Arrow.Down "next-scheme" NextScheme
-
-
-viewNextVariantButton : Html Msg
-viewNextVariantButton =
-    viewNavButton Arrow.Right "next-variant" NextVariant
-
-
-viewNavButton : Arrow -> String -> Msg -> Html Msg
-viewNavButton arrow cls msg =
-    div [ onClick msg, class cls, class "center-everything", class "btn-wrapper" ]
-        [ viewArrow arrow ]
+viewNavButton : Bool -> Msg -> Html Msg
+viewNavButton disabled msg =
+    let
+        arrowAttrs = if disabled then [ "disabled" ] else []
+    in
+    div
+        [ onClick msg
+        , classOfMsg msg
+        , class "center-everything"
+        , class "btn-wrapper"
+        ]
+        [ viewArrow (arrowOfMsg msg) arrowAttrs ]
 
 
 viewColorDots : Html Msg
