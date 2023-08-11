@@ -1,5 +1,5 @@
 :root {
-	--translation-amount: 16%;
+	--translation-amount: 12%;
 }
 
 body {
@@ -63,7 +63,11 @@ footer {
 	padding: 2rem;
 	border-radius: 1.5rem;
 	transform-origin: center center;
-	transition: transform 360ms;
+	transition: transform 360ms, opacity 420ms;
+}
+
+.arrow.disabled {
+	opacity: 0;
 }
 
 .btn-wrapper:active>.arrow {

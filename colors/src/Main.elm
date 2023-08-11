@@ -43,6 +43,11 @@ type alias Model =
     Ring Colorscheme
 
 
+type ButtonState
+    = Enabled
+    | Disabled
+
+
 defaultScheme : Colorscheme
 defaultScheme =
     { name = "Rose"
@@ -99,6 +104,42 @@ update msg model =
             ( advanceVariant backward model, Cmd.none )
 
 
+arrowOfMsg : Msg -> Arrow
+arrowOfMsg msg =
+    case msg of
+        PrevScheme ->
+            Arrow.Up
+
+        NextScheme ->
+            Arrow.Down
+
+        PrevVariant ->
+            Arrow.Left
+
+        NextVariant ->
+            Arrow.Right
+
+
+classOfMsg : Msg -> Html.Attribute msg
+classOfMsg msg =
+    let
+        msgClass =
+            case msg of
+                PrevScheme ->
+                    "prev-scheme"
+
+                NextScheme ->
+                    "next-scheme"
+
+                PrevVariant ->
+                    "prev-variant"
+
+                NextVariant ->
+                    "next-variant"
+    in
+    class msgClass
+
+
 colorNames : List String
 colorNames =
     [ "red", "green", "yellow", "blue", "magenta", "cyan" ]
@@ -120,44 +161,55 @@ view { curr } =
     let
         currVariant =
             curr.variants.curr
+
+        variantNavButtonState =
+            if Ring.length curr.variants == 1 then
+                Disabled
+
+            else
+                Enabled
     in
     div [ id "main", class (className curr) ]
         [ header [ class "center-everything", onClick NextScheme ]
             [ h1 [ id "scheme-name" ] [ text curr.name ] ]
-        , viewPrevSchemeButton
-        , viewPrevVariantButton
+        , viewNavButton Enabled PrevScheme
+        , viewNavButton Enabled NextScheme
         , viewColorDots
-        , viewNextVariantButton
-        , viewNextSchemeButton
+        , viewNavButton variantNavButtonState PrevVariant
+        , viewNavButton variantNavButtonState NextVariant
         , footer [ class "center-everything", onClick NextVariant ]
             [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
         ]
 
 
-viewPrevSchemeButton : Html Msg
-viewPrevSchemeButton =
-    viewNavButton Arrow.Up "prev-scheme" PrevScheme
+viewNavButton : ButtonState -> Msg -> Html Msg
+viewNavButton state msg =
+    let
+        -- Appending the `onClick` attribute to a list of common attributes
+        -- when the state is `Enabled` didn't work.
+        -- Dealing with the repetition :(
+        ( arrowAttrs, wrapperAttrs ) =
+            case state of
+                Disabled ->
+                    ( [ "disabled" ]
+                    , [ classOfMsg msg
+                      , class "center-everything"
+                      , class "btn-wrapper"
+                      ]
+                    )
 
-
-viewPrevVariantButton : Html Msg
-viewPrevVariantButton =
-    viewNavButton Arrow.Left "prev-variant" PrevVariant
-
-
-viewNextSchemeButton : Html Msg
-viewNextSchemeButton =
-    viewNavButton Arrow.Down "next-scheme" NextScheme
-
-
-viewNextVariantButton : Html Msg
-viewNextVariantButton =
-    viewNavButton Arrow.Right "next-variant" NextVariant
-
-
-viewNavButton : Arrow -> String -> Msg -> Html Msg
-viewNavButton arrow cls msg =
-    div [ onClick msg, class cls, class "center-everything", class "btn-wrapper" ]
-        [ viewArrow arrow ]
+                Enabled ->
+                    ( []
+                    , [ onClick msg
+                      , classOfMsg msg
+                      , class "center-everything"
+                      , class "btn-wrapper"
+                      ]
+                    )
+    in
+    div
+        wrapperAttrs
+        [ viewArrow (arrowOfMsg msg) arrowAttrs ]
 
 
 viewColorDots : Html Msg

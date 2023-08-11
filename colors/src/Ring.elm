@@ -8,6 +8,11 @@ type alias Ring a =
     }
 
 
+length : Ring a -> Int
+length { prev, next } =
+    1 + List.length prev + List.length next
+
+
 forward : Ring a -> Ring a
 forward ({ prev, curr, next } as ring) =
     case ( prev, next ) of
