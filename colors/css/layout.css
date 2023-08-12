@@ -44,14 +44,13 @@ footer {
 	padding: 0 1.8rem;
 	font-family: 'Teko', sans-serif;
 	letter-spacing: 0.5rem;
+	display: grid;
+	grid-template-columns: 4fr 5fr;
+	grid-template-rows: 1fr;
 }
 
-header {
-	grid-column: 1 / span 3;
-}
-
-footer {
-	grid-column: 1 / span 3;
+.row-fill {
+	grid-column: 1 / -1;
 }
 
 .arrow>svg>g {
@@ -71,6 +70,10 @@ footer {
 
 .arrow.disabled {
 	opacity: 0;
+}
+
+.btn-wrapper {
+	cursor: pointer;
 }
 
 .btn-wrapper:active>.arrow {
@@ -113,4 +116,23 @@ footer {
 .next-variant {
 	grid-column-start: 3;
 	--translation: var(--translation-amount), 0;
+}
+
+.left-span {
+	grid-column: 1 / span 1;
+}
+
+.left-span,
+.right-span {
+	grid-row-start: 1;
+	cursor: pointer;
+}
+
+.right-span {
+	grid-column: 2 / -1;
+}
+
+#scheme-name,
+#scheme-variant {
+	grid-row-start: 1;
 }

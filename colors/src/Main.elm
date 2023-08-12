@@ -170,16 +170,52 @@ view { curr } =
                 Enabled
     in
     div [ id "main", class (className curr) ]
-        [ header [ class "center-everything", onClick NextScheme ]
-            [ h1 [ id "scheme-name" ] [ text curr.name ] ]
+        [ header [ class "row-fill" ]
+            [ viewDominantRow h1 "scheme-name" curr.name
+            , viewSpan PrevScheme
+            , viewSpan NextScheme
+            ]
         , viewNavButton Enabled PrevScheme
         , viewNavButton Enabled NextScheme
         , viewColorDots
         , viewNavButton variantNavButtonState PrevVariant
         , viewNavButton variantNavButtonState NextVariant
-        , footer [ class "center-everything", onClick NextVariant ]
-            [ h2 [ id "scheme-variant" ] [ text currVariant ] ]
+        , footer [ class "row-fill" ]
+            [ viewDominantRow h2 "scheme-variant" currVariant
+            , viewSpan PrevVariant
+            , viewSpan NextVariant
+            ]
         ]
+
+
+viewDominantRow : (List (Html.Attribute msg) -> List (Html a) -> b) -> String -> String -> b
+viewDominantRow element eyeDee content =
+    element
+        [ class "row-fill"
+        , id eyeDee
+        , class "center-everything"
+        ]
+        [ text content ]
+
+
+viewSpan : Msg -> Html Msg
+viewSpan msg =
+    let
+        stile =
+            case msg of
+                PrevScheme ->
+                    "left-span"
+
+                NextScheme ->
+                    "right-span"
+
+                NextVariant ->
+                    "right-span"
+
+                PrevVariant ->
+                    "left-span"
+    in
+    div [ class stile, onClick msg ] []
 
 
 viewNavButton : ButtonState -> Msg -> Html Msg
