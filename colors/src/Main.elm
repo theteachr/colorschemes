@@ -145,13 +145,6 @@ colorNames =
     [ "red", "green", "yellow", "blue", "magenta", "cyan" ]
 
 
-colorBlock : String -> Html Msg
-colorBlock colorName =
-    li []
-        [ div [ class ("color-block " ++ colorName) ] []
-        ]
-
-
 
 -- VIEW
 
@@ -185,6 +178,17 @@ view { curr } =
             , viewSpan PrevVariant
             , viewSpan NextVariant
             ]
+        ]
+
+
+viewColorBlock : String -> Html Msg
+viewColorBlock colorName =
+    li []
+        [ div
+            [ class "color-block"
+            , class colorName
+            ]
+            []
         ]
 
 
@@ -253,7 +257,7 @@ viewColorDots : Html Msg
 viewColorDots =
     ul [ class "blocks" ]
         (colorNames
-            |> List.map colorBlock
+            |> List.map viewColorBlock
         )
 
 
