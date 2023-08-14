@@ -63,11 +63,10 @@ footer {
 	margin: 1rem;
 	width: var(--size);
 	height: var(--size);
-	color: var(--white);
 	border: none;
-	border-radius: 1.5rem;
+	border-radius: 50%;
 	transform-origin: center center;
-	transition: opacity 420ms, background 512ms;
+	transition: opacity 420ms, background 512ms, color 512ms;
 }
 
 .disabled {
@@ -83,7 +82,9 @@ footer {
 }
 
 .btn-wrapper:active>.arrow {
-	background: var(--black);
+	background: var(--white);
+	color: var(--black);
+	opacity: 0.4;
 }
 
 
