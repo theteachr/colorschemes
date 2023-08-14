@@ -70,6 +70,10 @@ footer {
 	transition: opacity 420ms, background 512ms;
 }
 
+.disabled {
+	pointer-events: none;
+}
+
 .arrow.disabled {
 	opacity: 0;
 }

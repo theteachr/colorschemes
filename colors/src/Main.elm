@@ -231,6 +231,7 @@ viewNavButton state msg =
                     , [ classOfMsg msg
                       , class "center-everything"
                       , class "btn-wrapper"
+                      , class "disabled"
                       ]
                     )
 
