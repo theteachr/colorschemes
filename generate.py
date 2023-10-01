@@ -1,24 +1,38 @@
 import json
+import os
 
 from dataclasses import dataclass
 from itertools import starmap
 from typing import Dict, List, Self, Tuple
 
-from constants import COLORS
-from shell_utils import list_dirs
 
-COLORSCHEME_JSON_FILES = sorted(
-    ["schemes/{}/colors.json".format(dir_) for dir_ in list_dirs("schemes")]
-)
+def list_dirs(path):
+    _, dirs, _ = next(os.walk(path))
+    return dirs
+
 
 ENTRYPOINT_TEMPLATE = "templates/index.html"
 SITE_ENTRYPOINT = "colors/index.html"
 COLORS_CSS = "colors/css/colors.css"
-
-# NOTE: This has to sync with the `id` given to the root div in Elm.
 ROOT_DIV_ID = "main"
-
 NEWLINE = "\n"
+
+
+COLORS = [
+    "black",
+    "red",
+    "green",
+    "yellow",
+    "blue",
+    "magenta",
+    "cyan",
+    "white",
+]
+
+
+COLORSCHEME_JSON_FILES = sorted(
+    ["schemes/{}/colors.json".format(dir_) for dir_ in list_dirs("schemes")]
+)
 
 
 @dataclass(frozen=True)

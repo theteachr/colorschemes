@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -xe
+
 python3.11 generate.py
 
 cd colors
