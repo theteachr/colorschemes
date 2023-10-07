@@ -165,8 +165,8 @@ view { curr } =
     div [ id "main", class (className curr) ]
         [ header [ class "row-fill" ]
             [ viewDominantRow h1 "scheme-name" curr.name
-            , viewSpan PrevScheme
-            , viewSpan NextScheme
+            , viewSpan Enabled PrevScheme
+            , viewSpan Enabled NextScheme
             ]
         , viewNavButton Enabled PrevScheme
         , viewNavButton Enabled NextScheme
@@ -175,8 +175,8 @@ view { curr } =
         , viewNavButton variantNavButtonState NextVariant
         , footer [ class "row-fill" ]
             [ viewDominantRow h2 "scheme-variant" currVariant
-            , viewSpan PrevVariant
-            , viewSpan NextVariant
+            , viewSpan variantNavButtonState PrevVariant
+            , viewSpan variantNavButtonState NextVariant
             ]
         ]
 
@@ -202,8 +202,8 @@ viewDominantRow element eyeDee content =
         [ text content ]
 
 
-viewSpan : Msg -> Html Msg
-viewSpan msg =
+viewSpan : ButtonState -> Msg -> Html Msg
+viewSpan buttonState msg =
     let
         stile =
             case msg of
@@ -218,8 +218,15 @@ viewSpan msg =
 
                 PrevVariant ->
                     "left-span"
+
+        attrs =
+            case buttonState of
+                Enabled ->
+                    [ class stile, onClick msg ]
+                Disabled ->
+                    [ class stile ]
     in
-    div [ class stile, onClick msg ] []
+    div attrs []
 
 
 viewNavButton : ButtonState -> Msg -> Html Msg
