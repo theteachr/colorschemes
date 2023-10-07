@@ -2,6 +2,7 @@ import json
 import os
 
 from dataclasses import dataclass
+from enum import Enum, auto
 from itertools import starmap
 from typing import Dict, List, Self, Tuple
 
@@ -15,19 +16,19 @@ ENTRYPOINT_TEMPLATE = "templates/index.html"
 SITE_ENTRYPOINT = "colors/index.html"
 COLORS_CSS = "colors/css/colors.css"
 ROOT_DIV_ID = "main"
-NEWLINE = "\n"
 
 
-COLORS = [
-    "black",
-    "red",
-    "green",
-    "yellow",
-    "blue",
-    "magenta",
-    "cyan",
-    "white",
-]
+class ColorPalette(Enum):
+    BACKGROUND = auto()
+    BLACK = auto()
+    RED = auto()
+    GREEN = auto()
+    YELLOW = auto()
+    BLUE = auto()
+    MAGENTA = auto()
+    CYAN = auto()
+    WHITE = auto()
+    # TODO: We need fg
 
 
 COLORSCHEME_JSON_FILES = sorted(
@@ -71,12 +72,12 @@ class Colorscheme:
         for variant, colors in self.variants.items():
             color_properties = starmap("\t--{}: {!r};".format, colors.items())
             color_rules = f"""#{ROOT_DIV_ID}.{self.hyphenated_name}-{variant} {{
-{NEWLINE.join(color_properties)}
+{chr(10).join(color_properties)}
 }}
-"""
+"""  # `chr(10)` because I can't use escape sequences inside f-strings
             root_nodes.append(color_rules)
 
-        return NEWLINE.join(root_nodes)
+        return "\n".join(root_nodes)
 
     @property
     def hyphenated_name(self) -> str:
@@ -105,14 +106,15 @@ class Colorscheme:
 
 def generate_css(colorschemes: List[Colorscheme], css_out_file: str):
     roots = [colorscheme.to_css_root() for colorscheme in colorschemes]
-    color_classes = NEWLINE.join(
-        map(".{0} {{\n\tbackground: var(--{0});\n}}".format, COLORS)
+    color_classes = "\n".join(
+        ".{0} {{\n\tbackground: var(--{0});\n}}".format(variant.name.lower())
+        for variant in ColorPalette
     )
 
     with open(css_out_file, "w") as f:
         f.writelines(roots)
         f.write(color_classes)
-        f.write(NEWLINE)
+        f.write("\n")
 
 
 def generate_html(schemes: List[Colorscheme], out_file: str):
