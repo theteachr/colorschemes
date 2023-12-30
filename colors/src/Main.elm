@@ -62,12 +62,7 @@ emptyModel =
 
 init : E.Value -> ( Model, Cmd Msg )
 init flags =
-    ( case D.decodeValue decoder flags of
-        Ok model ->
-            model
-
-        Err _ ->
-            emptyModel
+    ( Result.withDefault emptyModel <| D.decodeValue decoder flags
     , Cmd.none
     )
 
@@ -223,6 +218,7 @@ viewSpan buttonState msg =
             case buttonState of
                 Enabled ->
                     [ class stile, onClick msg ]
+
                 Disabled ->
                     [ class stile ]
     in
